@@ -15,7 +15,7 @@ extension String {
     ///
     /// - Parameter lineSpace: 间距值
     /// - Returns: 带行间距的字符串
-    func attributedStringWithLineSpace(_ lineSpace: CGFloat) -> NSMutableAttributedString {
+    func dj_attributedStringWithLineSpace(_ lineSpace: CGFloat) -> NSMutableAttributedString {
         
         let attrContent = NSMutableAttributedString(string: self)
         
@@ -27,7 +27,7 @@ extension String {
         return attrContent
     }
     
-    func attributedString(rangeArray: Array<Dictionary<String, Any>>, fontArray: Array<UIFont>, colorArray: Array<UIColor>, lineSpacing: CGFloat = 0) -> NSMutableAttributedString {
+    func dj_attributedString(rangeArray: Array<Dictionary<String, Any>>, fontArray: Array<UIFont>, colorArray: Array<UIColor>, lineSpacing: CGFloat = 0) -> NSMutableAttributedString {
     
         // 如果range数组为空，直接返回自己
         if rangeArray.count == 0 {
@@ -71,12 +71,12 @@ extension String {
 // 截取
 extension String {
 
-    func substringTo(_ offset: Int) -> String {
+    func dj_substringTo(_ offset: Int) -> String {
         
         return String(prefix(offset))
     }
     
-    func substringFrom(_ offset: Int) -> String {
+    func dj_substringFrom(_ offset: Int) -> String {
         
         let indexFrom = index(startIndex, offsetBy: offset)
         return String(self[indexFrom...])
@@ -87,9 +87,9 @@ extension String {
 
     /// calculate size with maxsize and font
     /// - Returns: size
-    func size(maxWidth: CGFloat, maxHeight: CGFloat, fontSize: CGFloat) -> CGSize {
+    func dj_size(maxWidth: CGFloat, maxHeight: CGFloat, fontSize: CGFloat) -> CGSize {
     
-        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: djFont(fontSize)], context: nil).size
+        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: dj_font(fontSize)], context: nil).size
     }
 }
 
@@ -98,7 +98,7 @@ extension String {
     /// 去除字符串中所有的空格
     ///
     /// - Returns: 无空格的字符串
-    func clearSpace() -> String {
+    func dj_clearSpace() -> String {
         
         return replacingOccurrences(of: " ", with: "")
     }
@@ -106,7 +106,7 @@ extension String {
 
 extension String {
     // 判断是否是整数
-    func isInt() -> Bool {
+    func dj_isInt() -> Bool {
         
         let scan = Scanner(string: self)
         var val:Int = 0
@@ -118,9 +118,9 @@ extension String {
 extension String {
     
     /// 将数字转化为汉字
-    func chineseString() -> String {
+    func dj_chineseString() -> String {
         // 不是整数直接返回自己
-        if !self.isInt() {
+        if !self.dj_isInt() {
             return self
         }
         

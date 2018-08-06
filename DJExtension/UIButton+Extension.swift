@@ -40,7 +40,7 @@ extension UIButton {
 // MARK: - instance method
 extension UIButton {
 
-    func setup(title: String, selTitle: String? = nil, fontSize: CGFloat, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, isBold: Bool = false, titleOffset: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)) {
+    func dj_setup(title: String, selTitle: String? = nil, fontSize: CGFloat, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, isBold: Bool = false, titleOffset: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)) {
         
         setTitle(title, for: .normal)
         setTitle(selTitle == nil ? title : selTitle, for: .selected)

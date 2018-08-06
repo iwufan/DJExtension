@@ -61,7 +61,7 @@ extension UIView {
 // MARK: - instance method
 extension UIView {
 
-    func addTopLine(color: UIColor = djHexColor("e9e9e9"), leftOffset: CGFloat = 0, righOffset: CGFloat = 0, height: CGFloat = 0.5) {
+    func dj_addTopLine(color: UIColor = dj_hexColor("e9e9e9"), leftOffset: CGFloat = 0, righOffset: CGFloat = 0, height: CGFloat = 0.5) {
         
         let line = UIView(bgColor: color)
         
@@ -72,7 +72,7 @@ extension UIView {
         addSubview(line)
     }
     
-    func addBottomLine(color: UIColor = djHexColor("e9e9e9"), leftOffset: CGFloat = 0, righOffset: CGFloat = 0, height: CGFloat = 0.5) {
+    func dj_addBottomLine(color: UIColor = dj_hexColor("e9e9e9"), leftOffset: CGFloat = 0, righOffset: CGFloat = 0, height: CGFloat = 0.5) {
         
         let line = UIView(bgColor: color)
         
@@ -88,7 +88,7 @@ extension UIView {
 extension UIView {
 
     /// 移除所有子控件
-    func removeAllSubviews() {
+    func dj_removeAllSubviews() {
         
         subviews.forEach { (subView) in
             
@@ -97,7 +97,7 @@ extension UIView {
     }
     
     /// 获取父控制器
-    func getParentViewController() -> UIViewController? {
+    func dj_getParentViewController() -> UIViewController? {
     
         var next:UIView? = self
         repeat{

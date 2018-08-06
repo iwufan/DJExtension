@@ -30,7 +30,7 @@ extension UITextView {
     ///   - textColor: 字体颜色
     ///   - textFontSize: 字体大小
     ///   - keyboardType: 键盘类型
-    func setup(textColor: UIColor, textFontSize: CGFloat, keyboardType: UIKeyboardType = .default) {
+    func dj_setup(textColor: UIColor, textFontSize: CGFloat, keyboardType: UIKeyboardType = .default) {
         
         self.textColor = textColor
         self.font = UIFont.systemFont(ofSize: textFontSize)

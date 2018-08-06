@@ -18,7 +18,7 @@ extension UITextField {
         
         let rangeDict = ["rangeLocation": "0", "rangeLength": "\(placeholder.count)"] as [String : Any]
         
-        let attrPlaceholder = placeholder.attributedString(rangeArray: [rangeDict], fontArray: [djFont(placeholderFontSize)], colorArray: [placeholderColor])
+        let attrPlaceholder = placeholder.dj_attributedString(rangeArray: [rangeDict], fontArray: [dj_font(placeholderFontSize)], colorArray: [placeholderColor])
         attributedPlaceholder = attrPlaceholder
         self.textColor = textColor
         self.font = UIFont.systemFont(ofSize: textFontSize)

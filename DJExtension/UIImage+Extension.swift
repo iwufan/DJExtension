@@ -26,7 +26,7 @@ extension UIImage {
 extension UIImage {
 
     /// get image with corner radius
-    func setCornerRadius(size:CGSize, radius: CGFloat) -> UIImage {
+    func dj_setCornerRadius(size:CGSize, radius: CGFloat) -> UIImage {
         
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         
@@ -50,7 +50,7 @@ extension UIImage {
     ///   - leftOffset: 拉伸位置距图片最左边距离
     ///   - topOffest: 拉伸位置距图片最顶部距离
     /// - Returns: 拉伸后的图片
-    func resize(leftOffset: Int, topOffest: Int) -> UIImage {
+    func dj_resize(leftOffset: Int, topOffest: Int) -> UIImage {
         return stretchableImage(withLeftCapWidth: leftOffset, topCapHeight: topOffest)
     }
 }
