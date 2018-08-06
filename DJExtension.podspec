@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage	= 'https://github.com/iwufan/DJExtension'
   s.license	= 'MIT'
   s.platform	= :ios
-  s.swift_version = 4.0
+  s.swift_version = '4.0'
   s.author 	= {'jiadawei' => 'jiadawei80@126.com'}
   s.ios.deployment_target = '8.0'
   s.source	= {:git => 'https://github.com/iwufan/DJExtension.git', :tag => s.version}
