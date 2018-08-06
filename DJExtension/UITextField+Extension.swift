@@ -16,9 +16,9 @@ extension UITextField {
         
         self.init()
         
-        let rangeDict = [MW_RANGE_LOCATION: "0", MW_RANGE_LENGTH: "\(placeholder.count)"] as [String : Any]
+        let rangeDict = ["rangeLocation": "0", "rangeLength": "\(placeholder.count)"] as [String : Any]
         
-        let attrPlaceholder = placeholder.attributedString(rangeArray: [rangeDict], fontArray: [MW_FONT(placeholderFontSize)], colorArray: [placeholderColor])
+        let attrPlaceholder = placeholder.attributedString(rangeArray: [rangeDict], fontArray: [djFont(placeholderFontSize)], colorArray: [placeholderColor])
         attributedPlaceholder = attrPlaceholder
         self.textColor = textColor
         self.font = UIFont.systemFont(ofSize: textFontSize)

@@ -89,7 +89,7 @@ extension String {
     /// - Returns: size
     func size(maxWidth: CGFloat, maxHeight: CGFloat, fontSize: CGFloat) -> CGSize {
     
-        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: DJ_FONT(fontSize)], context: nil).size
+        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: djFont(fontSize)], context: nil).size
     }
 }
 
@@ -101,28 +101,6 @@ extension String {
     func clearSpace() -> String {
         
         return replacingOccurrences(of: " ", with: "")
-    }
-}
-
-extension String {
-    // 获得md5字符串
-    func md5() -> String {
-        
-        let str = self.cString(using: String.Encoding.utf8)
-        let strLen = CC_LONG(self.lengthOfBytes(using: String.Encoding.utf8))
-        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
-        
-        CC_MD5(str!, strLen, result)
-        
-        let hash = NSMutableString()
-        for i in 0..<digestLen {
-            hash.appendFormat("%02x", result[i])
-        }
-        
-        result.deallocate(capacity: digestLen)
-        
-        return String(format: hash as String)
     }
 }
 

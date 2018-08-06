@@ -16,21 +16,21 @@ extension UILabel {
         
         self.init()
         
-        self.text = title
-        self.font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
-        self.textColor = color
-        self.textAlignment = alignment
+        text = title
+        font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+        textColor = color
+        textAlignment = alignment
     }
 }
 
 // MARK: - instance method
 extension UILabel {
 
-    func set(title: String, fontSize: CGFloat, color: UIColor, alignment: NSTextAlignment = .left, isBold: Bool = false ) {
+    func setup(title: String, fontSize: CGFloat, color: UIColor, alignment: NSTextAlignment = .left, isBold: Bool = false ) {
 
-        self.text = title
-        self.font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
-        self.textColor = color
-        self.textAlignment = alignment
+        text = title
+        font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+        textColor = color
+        textAlignment = alignment
     }
 }

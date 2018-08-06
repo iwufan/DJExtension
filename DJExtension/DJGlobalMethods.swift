@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let DJ_SCREEN_STANDARD_WIDTH = 375
+let djScreenStandardWidth = 375     // standard width as iPhone 6.
 
 // MARK: - color
 //
@@ -19,13 +19,13 @@ let DJ_SCREEN_STANDARD_WIDTH = 375
 ///   - hex: 16 system
 ///   - alpha: alpha
 /// - Returns: UIColor
-func DJ_HEXCOLOR(_ hex: String, alpha: CGFloat = 1.0) ->UIColor{
+func djHexColor(_ hex: String, alpha: CGFloat = 1.0) ->UIColor{
     
     return UIColor.hex(hex, alpha: alpha)
 }
 
 /// get gray color
-func DJ_RGBCOLOR(_ value: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
+func djRgbColor(_ value: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
     
     return UIColor(red: value / 255.0, green: value / 255.0, blue: value / 255.0, alpha: alpha)
 }
@@ -37,7 +37,7 @@ func DJ_RGBCOLOR(_ value: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
 /// - small: type of 4, 4s, 5, 5s, 5c, se, iPod
 /// - normal: type of 6, 6s, 7
 /// - plus: type of 6p, 6sp, 7p
-public enum DJ_SCREEN_TYPE : Int {
+public enum DJScreenType : Int {
     
     case small
     case normal
@@ -47,7 +47,7 @@ public enum DJ_SCREEN_TYPE : Int {
 /// get screen type
 ///
 /// - Returns: screen type
-func DJ_SCREENTYPE() -> DJ_SCREEN_TYPE{
+func djScreenType() -> DJScreenType{
 
     let screenWidth = UIScreen.main.bounds.width
     
@@ -64,34 +64,16 @@ func DJ_SCREENTYPE() -> DJ_SCREEN_TYPE{
 ///
 /// - Parameter value: standard value
 /// - Returns: adapter value
-func DJ_ADAPTER_VALUE(_ value: CGFloat) -> CGFloat {
+func djAdapterValue(_ value: CGFloat) -> CGFloat {
 
-    let screenWidth = UIScreen.main.bounds.width
-    
-    return value * screenWidth / CGFloat(DJ_SCREEN_STANDARD_WIDTH)
-}
-
-/// current screen width
-///
-/// - Returns: screen width
-func DJ_SCREEN_WIDTH() -> CGFloat {
-    
-    return UIScreen.main.bounds.width
-}
-
-/// current screen height
-///
-/// - Returns: screen height
-func DJ_SCREEN_HEIGHT() -> CGFloat {
-    
-    return UIScreen.main.bounds.height
+    return value * djScreenWidth / CGFloat(djScreenStandardWidth)
 }
 
 /// create a number object
 ///
 /// - Parameter rawValue: int
 /// - Returns: number
-func DJ_NUMBER(_ rawValue: Int) -> NSNumber {
+func djNumber(_ rawValue: Int) -> NSNumber {
 
     return NSNumber.init(value: rawValue)
 }
@@ -99,12 +81,12 @@ func DJ_NUMBER(_ rawValue: Int) -> NSNumber {
 // MARK: - Font
 
 /// setup font
-func DJ_FONT(_ fontSize: CGFloat) -> UIFont {
+func djFont(_ fontSize: CGFloat) -> UIFont {
 
     return UIFont.systemFont(ofSize: fontSize)
 }
 /// setup bold font
-func DJ_BOLD_FONT(_ fontSize: CGFloat) -> UIFont {
+func djBoldFont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont.boldSystemFont(ofSize: fontSize)
 }
@@ -113,19 +95,19 @@ func DJ_BOLD_FONT(_ fontSize: CGFloat) -> UIFont {
 ///
 /// - Parameter key: 存储的键
 /// - Returns: 值
-func DJ_USERDEFAULTS(_ key: String) -> String? {
+func djUserdefaults(_ key: String) -> String? {
 
     return UserDefaults.standard.value(forKey: key) as? String
 }
 
 /// 通知
 /// 发通知
-func DJ_POSTNOTIFICATION(name: String, obj: Any? = nil, userInfo: [AnyHashable : Any]? = nil) {
+func djPostNotification(name: String, obj: Any? = nil, userInfo: [AnyHashable : Any]? = nil) {
 
     NotificationCenter.default.post(name: NSNotification.Name(rawValue:name) , object: obj, userInfo: userInfo)
 }
 /// 监听通知
-func DJ_ADDOBSERVER(observer: Any, selector: Selector, name: String, obj: Any? = nil) {
+func djAddObserver(observer: Any, selector: Selector, name: String, obj: Any? = nil) {
 
     NotificationCenter.default.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: name), object: obj)
 }

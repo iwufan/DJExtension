@@ -21,9 +21,9 @@ extension UIColor {
             cString = (cString as NSString).substring(from: 1)
         }
         
-        assert(cString.characters.count == 6, "invalid 16 system string")
+        assert(cString.count == 6, "invalid 16 system string")
         
-        if (cString.characters.count != 6) {
+        if (cString.count != 6) {
             return UIColor.gray
         }
         

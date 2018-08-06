@@ -223,7 +223,7 @@ extension DJTool {
         }
     }
     /// 获取沙盒文件路径
-    static func getFileURL(fileName: String) -> URL {
+    static func getPathInSandBox(fileName: String) -> URL {
         
         let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
         let copyPath = (docPath! as NSString).appendingPathComponent(fileName)
