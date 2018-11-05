@@ -13,7 +13,7 @@ extension NSAttributedString {
     /// quick way to create a attribute string
     class func dj_init(string: String, fontSize: CGFloat, color: UIColor) -> NSAttributedString {
     
-        let attrString = NSAttributedString(string: string, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: fontSize), NSAttributedStringKey.foregroundColor: color])
+        let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize), NSAttributedString.Key.foregroundColor: color])
         
         return attrString
     }

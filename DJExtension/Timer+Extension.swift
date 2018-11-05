@@ -10,12 +10,12 @@ import UIKit
 
 extension Timer {
     
-    // 暂停
+    // pause
     func dj_pause() {
         
         fireDate = Date.distantFuture
     }
-    // 继续
+    // resume
     func dj_resume() {
         
         fireDate = Date()

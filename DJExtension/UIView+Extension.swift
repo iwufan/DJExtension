@@ -20,44 +20,6 @@ extension UIView {
     }
 }
 
-// MARK: - properties
-extension UIView {
-
-    var y: CGFloat {
-        get {
-            return self.frame.origin.y
-        }
-        set {
-            self.frame.origin.y = newValue
-        }
-    }
-    /// get max y
-    var maxY: CGFloat {
-
-        get {
-            return frame.origin.y + frame.size.height
-        }
-        set {
-            frame.origin.y = newValue - frame.size.height
-        }
-    }
-    var width: CGFloat {
-        get {
-            return self.frame.size.width
-        }
-        set {
-            self.frame.size.width = newValue
-        }
-    }
-    var height: CGFloat {
-        get {
-            return self.frame.size.height
-        }
-        set {
-            self.frame.size.height = newValue
-        }
-    }
-}
 // MARK: - instance method
 extension UIView {
 
@@ -75,7 +37,7 @@ extension UIView {
     func dj_addBottomLine(color: UIColor = dj_hexColor("e9e9e9"), leftOffset: CGFloat = 0, righOffset: CGFloat = 0, height: CGFloat = 0.5) {
         
         let line = UIView(bgColor: color)
-        
+        line.tag = 100001
         addSubview(line)
         
         let lineWidth = bounds.width - leftOffset - righOffset
@@ -83,11 +45,32 @@ extension UIView {
         
         line.frame = CGRect(x: leftOffset, y: lineY, width: lineWidth, height: height)
     }
+    
+    func dj_removeBottomLine() {
+        
+        subviews.forEach { (view) in
+        
+            if view.tag == 100001 {
+                view.removeFromSuperview()
+            }
+        }
+    }
+}
+
+extension UIView {
+    /// set corner radius
+    func dj_setCornerRadius(radius: CGFloat, borderWidth: CGFloat = 0.5, borderColor: UIColor) {
+        
+        layer.cornerRadius = radius
+        layer.masksToBounds = true
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
+    }
 }
 
 extension UIView {
 
-    /// 移除所有子控件
+    /// remove all subviews
     func dj_removeAllSubviews() {
         
         subviews.forEach { (subView) in
@@ -96,7 +79,7 @@ extension UIView {
         }
     }
     
-    /// 获取父控制器
+    /// get parent viewController
     func dj_getParentViewController() -> UIViewController? {
     
         var next:UIView? = self

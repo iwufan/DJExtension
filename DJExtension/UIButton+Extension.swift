@@ -23,31 +23,41 @@ extension UIButton {
     }
     
     /// create a button with title/fontSize/TitleColor/bgColor
-    convenience init (title: String, selTitle: String? = nil, fontSize: CGFloat, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, isBold: Bool = false, titleOffset: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0))  {
+    convenience init (title: String, selTitle: String? = nil, titleFont: UIFont, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), target: Any? = nil, action: Selector? = nil)  {
         
         self.init()
         
         setTitle(title, for: .normal)
         setTitle(selTitle == nil ? title : selTitle, for: .selected)
-        titleLabel?.font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+        titleLabel?.font = titleFont
         setTitleColor(titleColor, for: .normal)
         setTitleColor(selTitleColor == nil ? titleColor : selTitleColor, for: .selected)
         backgroundColor = bgColor
         titleEdgeInsets = titleOffset
+        
+        guard let action = action else {
+            return
+        }
+        addTarget(target, action: action, for: .touchUpInside)
     }
 }
 
 // MARK: - instance method
 extension UIButton {
 
-    func dj_setup(title: String, selTitle: String? = nil, fontSize: CGFloat, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, isBold: Bool = false, titleOffset: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)) {
+    func dj_setup(title: String, selTitle: String? = nil, titleFont: UIFont, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, isBold: Bool = false, titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), target: Any? = nil, action: Selector? = nil) {
         
         setTitle(title, for: .normal)
         setTitle(selTitle == nil ? title : selTitle, for: .selected)
-        titleLabel?.font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+        titleLabel?.font = titleFont
         setTitleColor(titleColor, for: .normal)
         setTitleColor(selTitleColor, for: .selected)
         backgroundColor = bgColor
         titleEdgeInsets = titleOffset
+        
+        guard let action = action else {
+            return
+        }
+        addTarget(target, action: action, for: .touchUpInside)
     }
 }

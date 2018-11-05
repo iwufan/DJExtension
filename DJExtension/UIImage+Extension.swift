@@ -18,7 +18,7 @@ extension UIImage {
             return UIImage()
         }
 
-        return image.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        return image.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
     }
 }
 
@@ -44,12 +44,7 @@ extension UIImage {
         return image ?? self
     }
     
-    /// 拉伸图片
-    ///
-    /// - Parameters:
-    ///   - leftOffset: 拉伸位置距图片最左边距离
-    ///   - topOffest: 拉伸位置距图片最顶部距离
-    /// - Returns: 拉伸后的图片
+    /// Stretch a image
     func dj_resize(leftOffset: Int, topOffest: Int) -> UIImage {
         return stretchableImage(withLeftCapWidth: leftOffset, topCapHeight: topOffest)
     }

@@ -12,28 +12,23 @@ import UIKit
 extension UITextView {
     
     /// quick way to create a text view
-    convenience init (textColor: UIColor, textFontSize: CGFloat, keyboardType: UIKeyboardType = .default) {
+    convenience init (textColor: UIColor, font: UIFont, keyboardType: UIKeyboardType = .default) {
         
         self.init()
         
         self.textColor = textColor
-        self.font = UIFont.systemFont(ofSize: textFontSize)
+        self.font = font
         self.keyboardType = keyboardType
     }
 }
 
 extension UITextView {
     
-    /// 设置属性
-    ///
-    /// - Parameters:
-    ///   - textColor: 字体颜色
-    ///   - textFontSize: 字体大小
-    ///   - keyboardType: 键盘类型
-    func dj_setup(textColor: UIColor, textFontSize: CGFloat, keyboardType: UIKeyboardType = .default) {
+    /// set properties
+    func dj_setup(textColor: UIColor, font: UIFont, keyboardType: UIKeyboardType = .default) {
         
         self.textColor = textColor
-        self.font = UIFont.systemFont(ofSize: textFontSize)
+        self.font = font
         self.keyboardType = keyboardType
     }
 }

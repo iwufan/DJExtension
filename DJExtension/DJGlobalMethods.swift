@@ -11,7 +11,7 @@ import UIKit
 
 let djScreenStandardWidth = 375     // standard width as iPhone 6.
 
-// MARK: - color
+// MARK: - Color
 //
 /// get color with hex value
 ///
@@ -25,12 +25,18 @@ func dj_hexColor(_ hex: String, alpha: CGFloat = 1.0) ->UIColor{
 }
 
 /// get gray color
-func dj_rgbColor(_ value: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
+func dj_rgbGrayColor(_ value: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
     
     return UIColor(red: value / 255.0, green: value / 255.0, blue: value / 255.0, alpha: alpha)
 }
 
-// MARK: - adapter
+/// get rgb color
+func dj_rgbColor(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
+    
+    return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: alpha)
+}
+
+// MARK: - Screen
 
 /// screen type
 ///
@@ -48,7 +54,7 @@ public enum DJScreenType : Int {
 ///
 /// - Returns: screen type
 func dj_screenType() -> DJScreenType{
-
+    
     let screenWidth = UIScreen.main.bounds.width
     
     if screenWidth < 330 {
@@ -60,21 +66,23 @@ func dj_screenType() -> DJScreenType{
     }
 }
 
+// MARK: - Adapt
 /// get adapter value
 ///
 /// - Parameter value: standard value
 /// - Returns: adapter value
 func dj_adapterValue(_ value: CGFloat) -> CGFloat {
-
+    
     return value * djScreenWidth / CGFloat(djScreenStandardWidth)
 }
 
+// MARK: - NSNumber
 /// create a number object
 ///
 /// - Parameter rawValue: int
 /// - Returns: number
 func dj_number(_ rawValue: Int) -> NSNumber {
-
+    
     return NSNumber.init(value: rawValue)
 }
 
@@ -82,7 +90,7 @@ func dj_number(_ rawValue: Int) -> NSNumber {
 
 /// setup font
 func dj_font(_ fontSize: CGFloat) -> UIFont {
-
+    
     return UIFont.systemFont(ofSize: fontSize)
 }
 /// setup bold font
@@ -91,15 +99,24 @@ func dj_boldFont(_ fontSize: CGFloat) -> UIFont {
     return UIFont.boldSystemFont(ofSize: fontSize)
 }
 
-/// 获取偏好设置的值
+// MARK: - Userdefaults
+/// get value from userdefaults
 ///
-/// - Parameter key: 存储的键
-/// - Returns: 值
+/// - Parameter key: key
+/// - Returns: value
 func dj_userdefaults(_ key: String) -> String? {
-
+    
     return UserDefaults.standard.value(forKey: key) as? String
 }
 
+// MARK: - height of navigation bar
+func dj_navigationBarHeight() -> CGFloat {
+    
+    let statusHeight = UIApplication.shared.statusBarFrame.height
+    return statusHeight + 44
+}
+
+// MARK: - Judge
 /// judge whether a string is empty
 ///
 /// - Parameter object: string
@@ -127,12 +144,21 @@ func dj_isEmptyString(_ obj: AnyObject?) -> Bool {
     return (str.count == 0) ? true : false;
 }
 
-/// 快速获得日期字符串
+/// whether a iPhoneX, XS, XS Max or not
+///
+/// - Returns: true = 是
+func dj_isIPhoneX() -> Bool {
+    
+    return djScreenHeight == 812
+}
+
+// MARK: - Date
+/// get date string from Date object
 ///
 /// - Parameters:
-///   - date: 日期对象
-///   - format: 格式
-/// - Returns: 日期字符串
+///   - date: a Date object
+///   - format: format
+/// - Returns: date string
 func dj_getFormattedDate(date: Date, format: String = "yyyy/MM/dd") -> String {
     
     let formatter = DateFormatter()
@@ -141,10 +167,10 @@ func dj_getFormattedDate(date: Date, format: String = "yyyy/MM/dd") -> String {
     return formatter.string(from: date)
 }
 
-/// 转换时间戳为日期
+/// get date string from a timestamp
 ///
-/// - Parameter timeStamp: 时间戳
-/// - Returns: 日期（yyyy/MM/dd）
+/// - Parameter timeStamp: timestamp
+/// - Returns: date string
 func dj_getDateFromTimeStamp(timeStamp: Int, format: String = "yyyy/MM/dd") -> String? {
     
     let date = Date(timeIntervalSince1970: TimeInterval(timeStamp / 1000))
@@ -152,13 +178,13 @@ func dj_getDateFromTimeStamp(timeStamp: Int, format: String = "yyyy/MM/dd") -> S
     return dj_getFormattedDate(date: date, format: format)
 }
 
-/// 转换日期字符串为时间戳
+/// get a timestamp from a date string
 ///
 /// - Parameters:
-///   - dateStr: 日期字符串
-///   - format: 日期格式
-/// - Returns: 时间戳
-func dj_getTimeStampFromDate(dateStr: String, format: String) -> Double? {
+///   - dateStr: date string
+///   - format: format
+/// - Returns: timestamp
+func dj_getTimeStampFromDateString(dateStr: String, format: String) -> Double? {
     
     let formatter = DateFormatter()
     formatter.dateFormat = format
@@ -173,7 +199,8 @@ func dj_getTimeStampFromDate(dateStr: String, format: String) -> Double? {
     return timestamp
 }
 
-// 获得Int属性值
+// MARK: - Property value
+// convert a value to int
 func dj_getInt(_ value: Any?) -> Int! {
     
     if (value as AnyObject).isKind(of: NSNull.self) || dj_isEmpty(value as AnyObject) {
@@ -182,7 +209,7 @@ func dj_getInt(_ value: Any?) -> Int! {
         return value as? Int
     }
 }
-// 获得String属性值
+// convert a value to string
 func dj_getString(_ value: Any?) -> String! {
     
     if (value as AnyObject).isKind(of: NSNull.self) || (value as? String) == nil || dj_isEmpty(value as AnyObject) {
@@ -192,36 +219,58 @@ func dj_getString(_ value: Any?) -> String! {
     }
 }
 
-/// 归档对象
+/// archive a object
 ///
 /// - Parameters:
-///   - name: 文件名
-///   - obj: 对象本身
-func dj_archiveFile(name: String, obj: Any?) {
+///   - name: archive name
+///   - obj: the object to be archived
+func dj_archiveFile(name: String, obj: Any) {
     
     let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
     let path = (docPath! as NSString).appendingPathComponent(name)
     
-    NSKeyedArchiver.archiveRootObject(obj!, toFile: path)
+    if #available(iOS 12.0, *) {
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: obj, requiringSecureCoding: true)
+            try data.write(to: URL(fileURLWithPath: path))
+        } catch {
+            print("archive - failed")
+        }
+    } else {
+        NSKeyedArchiver.archiveRootObject(obj, toFile: path)
+    }
 }
 
-/// 解档对象
+/// unarchive a object
 ///
-/// - Parameter name: 文件名
-/// - Returns: 解档后的对象
+/// - Parameter name: file name
+/// - Returns: an object
 func dj_unarchiveFile(name: String) -> Any? {
     
     let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
     let path = (docPath! as NSString).appendingPathComponent(name)
     
-    return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+    if #available(iOS 12.0, *) {
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path))
+            let obj = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [AnyObject.self], from: data)
+            
+            return obj
+        } catch {
+            print("unarchive - failed")
+            return nil
+        }
+    } else {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+    }
 }
 
-/// 从url读取内容并存储成文件
+// MARK: - file
+/// Read a file from a url then save it to disk
 ///
 /// - Parameters:
-///   - url: 路径
-///   - fileName: 保存的文件名
+///   - url: internet url
+///   - fileName: file name
 func dj_saveFile(url: String, fileName: String) {
     
     if dj_isEmptyString(url as AnyObject) {
@@ -239,11 +288,10 @@ func dj_saveFile(url: String, fileName: String) {
     }
 }
 
-/// 删除文件
+/// delete file
 ///
 /// - Parameters:
-///   - fileName: 文件名
-/// - Returns: 是否删除成功
+///   - fileName: file name
 func dj_deleteFile(fileName: String) {
     
     let fileManager = FileManager()
@@ -259,15 +307,15 @@ func dj_deleteFile(fileName: String) {
             try fileManager.removeItem(atPath: filePath)
             
         } catch {
-            print("文件删除失败")
+            print("file delete failed")
         }
     }
 }
-/// 检查文件是否存在
+/// Check file exist or not
 ///
 /// - Parameters:
-///   - fileName: 文件名
-/// - Returns: 是否删除成功
+///   - fileName: file name
+/// - Returns: true = exist
 func dj_checkFileExist(fileName: String) -> Bool {
     
     let fileManager = FileManager()
@@ -284,7 +332,7 @@ func dj_checkFileExist(fileName: String) -> Bool {
         return false
     }
 }
-/// 获取沙盒文件路径
+/// get file path in sandbox
 func dj_getPathInSandBox(fileName: String) -> URL {
     
     let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
@@ -293,14 +341,14 @@ func dj_getPathInSandBox(fileName: String) -> URL {
     return URL(fileURLWithPath: copyPath)
 }
 
-/// 通知
-/// 发通知
+// MARK: - Notification
+/// Post a notification
 func dj_postNotification(name: String, obj: Any? = nil, userInfo: [AnyHashable : Any]? = nil) {
-
+    
     NotificationCenter.default.post(name: NSNotification.Name(rawValue:name) , object: obj, userInfo: userInfo)
 }
-/// 监听通知
+/// Observer a notification
 func dj_addObserver(observer: Any, selector: Selector, name: String, obj: Any? = nil) {
-
+    
     NotificationCenter.default.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: name), object: obj)
 }

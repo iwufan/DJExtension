@@ -12,25 +12,27 @@ import UIKit
 extension UILabel {
     
     /// quick way to create a label
-    convenience init (title: String, fontSize: CGFloat, color: UIColor, alignment: NSTextAlignment = .left, isBold: Bool = false) {
+    convenience init (text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1) {
         
         self.init()
         
-        text = title
-        font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+        self.text = text
+        self.font = font
         textColor = color
         textAlignment = alignment
+        numberOfLines = lineCount
     }
 }
 
 // MARK: - instance method
 extension UILabel {
 
-    func dj_setup(title: String, fontSize: CGFloat, color: UIColor, alignment: NSTextAlignment = .left, isBold: Bool = false ) {
+    func dj_setup(text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1) {
 
-        text = title
-        font = isBold ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+        self.text = text
+        self.font = font
         textColor = color
         textAlignment = alignment
+        numberOfLines = lineCount
     }
 }

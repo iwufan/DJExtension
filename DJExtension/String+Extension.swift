@@ -11,7 +11,7 @@ import UIKit
 // MARK - attribute string
 extension String {
     
-    /// 给普通字符串添加行间距
+    /// Add line space for String
     ///
     /// - Parameter lineSpace: 间距值
     /// - Returns: 带行间距的字符串
@@ -22,53 +22,47 @@ extension String {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpace
         
-        attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, self.count))
+        attrContent.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, self.count))
         
         return attrContent
     }
-    
+    /// convert a String to attributed string with parameters
     func dj_attributedString(rangeArray: Array<Dictionary<String, Any>>, fontArray: Array<UIFont>, colorArray: Array<UIColor>, lineSpacing: CGFloat = 0) -> NSMutableAttributedString {
     
-        // 如果range数组为空，直接返回自己
+        // if rangeArray is empty, return self
         if rangeArray.count == 0 {
             return NSMutableAttributedString(string: self)
         }
-        
-        // 如果数组元素个数不一致，直接把返回自己
+        // if every arrays' count are not consistent, return self
         if (rangeArray.count != fontArray.count) || (rangeArray.count != colorArray.count) {
             return NSMutableAttributedString(string: self)
         }
-        
-        // 带属性字符串
+        // define a Attributed String
         let attrContent = NSMutableAttributedString(string: self)
         
         for index in 0..<rangeArray.count {
-            
-            // 获取range
+            // get range
             let dict = rangeArray[index];
-            let location:String = dict["rangeLocation"] as! String;
-            let length:String = dict["rangeLength"] as! String;
-            
+            let location:String = dict[djRangeLocation] as! String;
+            let length:String = dict[djRangeLength] as! String;
             // range
             let range = NSMakeRange(Int(location)!, Int(length)!);
-            
-            // 字体大小
-            attrContent.addAttribute(NSAttributedStringKey.font, value: fontArray[index], range: range)
-            
-            // 字体颜色
-            attrContent.addAttribute(NSAttributedStringKey.foregroundColor, value: colorArray[index], range: range)
+            // set font
+            attrContent.addAttribute(NSAttributedString.Key.font, value: fontArray[index], range: range)
+            // set textcolor
+            attrContent.addAttribute(NSAttributedString.Key.foregroundColor, value: colorArray[index], range: range)
         }
         
-        // 内容行间距
+        // set line space
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing;
         
-        attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, self.count))
+        attrContent.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, self.count))
         
         return attrContent;
     }
 }
-// 截取
+// MARK: - Clip String
 extension String {
 
     func dj_substringTo(_ offset: Int) -> String {
@@ -89,13 +83,13 @@ extension String {
     /// - Returns: size
     func dj_size(maxWidth: CGFloat, maxHeight: CGFloat, fontSize: CGFloat) -> CGSize {
     
-        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: dj_font(fontSize)], context: nil).size
+        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: dj_font(fontSize)], context: nil).size
     }
 }
 
 extension String {
     
-    /// 去除字符串中所有的空格
+    /// remove all the space
     ///
     /// - Returns: 无空格的字符串
     func dj_clearSpace() -> String {
@@ -105,7 +99,7 @@ extension String {
 }
 
 extension String {
-    // 判断是否是整数
+    
     func dj_isInt() -> Bool {
         
         let scan = Scanner(string: self)
@@ -117,9 +111,9 @@ extension String {
 
 extension String {
     
-    /// 将数字转化为汉字
-    func dj_chineseString() -> String {
-        // 不是整数直接返回自己
+    /// convert a number to chinese string
+    func dj_chineseNumber() -> String {
+        
         if !self.dj_isInt() {
             return self
         }
