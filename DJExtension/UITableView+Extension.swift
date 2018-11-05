@@ -2,8 +2,8 @@
 //  UITableView+Extension.swift
 //  BambooLodge
 //
-//  Created by 贾大伟 on 2018/8/16.
-//  Copyright © 2018 david. All rights reserved.
+//  Created by David Jia on 2018/8/16.
+//  Copyright © 2018 David Jia. All rights reserved.
 //
 
 import UIKit
