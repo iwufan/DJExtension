@@ -23,27 +23,33 @@ extension UIView {
 // MARK: - instance method
 extension UIView {
 
-    func dj_addTopLine(color: UIColor = dj_hexColor("e9e9e9"), leftOffset: CGFloat = 0, righOffset: CGFloat = 0, height: CGFloat = 0.5) {
+    func dj_addTopLine(color: UIColor = cmLineColor, leftOffset: CGFloat = 0, rightOffset: CGFloat = 0, height: CGFloat = 0.5) {
         
         let line = UIView(bgColor: color)
         
-        let lineWidth = bounds.width - leftOffset - righOffset
-        
-        line.frame = CGRect(x: leftOffset, y: 0, width: lineWidth, height: height)
-        
         addSubview(line)
+        
+        line.snp.makeConstraints { (make) in
+            make.left.equalTo(self.snp.left).offset(leftOffset)
+            make.right.equalTo(self.snp.right).offset(-rightOffset)
+            make.top.equalTo(self.snp.top)
+            make.height.equalTo(height)
+        }
     }
     
-    func dj_addBottomLine(color: UIColor = dj_hexColor("e9e9e9"), leftOffset: CGFloat = 0, righOffset: CGFloat = 0, height: CGFloat = 0.5) {
+    func dj_addBottomLine(color: UIColor = cmLineColor, leftOffset: CGFloat = 0, rightOffset: CGFloat = 0, height: CGFloat = 0.5) {
         
         let line = UIView(bgColor: color)
         line.tag = 100001
+        
         addSubview(line)
         
-        let lineWidth = bounds.width - leftOffset - righOffset
-        let lineY = bounds.height - height
-        
-        line.frame = CGRect(x: leftOffset, y: lineY, width: lineWidth, height: height)
+        line.snp.makeConstraints { (make) in
+            make.left.equalTo(self.snp.left).offset(leftOffset)
+            make.right.equalTo(self.snp.right).offset(-rightOffset)
+            make.bottom.equalTo(self.snp.bottom)
+            make.height.equalTo(height)
+        }
     }
     
     func dj_removeBottomLine() {

@@ -13,8 +13,8 @@ extension String {
     
     /// Add line space for String
     ///
-    /// - Parameter lineSpace: 间距值
-    /// - Returns: 带行间距的字符串
+    /// - Parameter lineSpace:
+    /// - Returns: string with line space
     func dj_attributedStringWithLineSpace(_ lineSpace: CGFloat) -> NSMutableAttributedString {
         
         let attrContent = NSMutableAttributedString(string: self)

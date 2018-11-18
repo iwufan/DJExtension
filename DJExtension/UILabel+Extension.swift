@@ -22,6 +22,7 @@ extension UILabel {
         textAlignment = alignment
         numberOfLines = lineCount
     }
+    
 }
 
 // MARK: - instance method

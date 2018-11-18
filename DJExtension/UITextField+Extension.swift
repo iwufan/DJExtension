@@ -11,19 +11,44 @@ import UIKit
 /// init method
 extension UITextField {
 
-    /// quick way to create a label
-    convenience init (placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing) {
+    /// quick way to create a textfield
+    convenience init (placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing) {
         
         self.init()
         
-        let rangeDict = [djRangeLocation: "0", djRangeLength: "\(placeholder.count)"] as [String : Any]
+        let rangeDict           = [djRangeLocation: "0", djRangeLength: "\(placeholder.count)"] as [String : Any]
         
-        let attrPlaceholder = placeholder.dj_attributedString(rangeArray: [rangeDict], fontArray: [placeholderFont], colorArray: [placeholderColor])
-        attributedPlaceholder = attrPlaceholder
-        self.textColor = textColor
-        self.font = font
-        self.tintColor = placeholderColor
-        self.keyboardType = keyboardType
-        self.clearButtonMode = clearButtonMode
+        let attrPlaceholder     = placeholder.dj_attributedString(rangeArray: [rangeDict], fontArray: [placeholderFont], colorArray: [placeholderColor])
+        attributedPlaceholder   = attrPlaceholder
+        self.textColor          = textColor
+        self.font               = font == nil ? placeholderFont : font
+        self.textAlignment      = alignment
+        self.tintColor          = placeholderColor
+        self.keyboardType       = keyboardType
+        self.clearButtonMode    = clearButtonMode
     }
+    /// quick way to create a textfield with leftImageView
+    convenience init(placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, leftImage: String, imageSize: CGSize) {
+        
+        self.init()
+    
+        let rangeDict           = [djRangeLocation: "0", djRangeLength: "\(placeholder.count)"] as [String : Any]
+
+        let attrPlaceholder     = placeholder.dj_attributedString(rangeArray: [rangeDict], fontArray: [placeholderFont], colorArray: [placeholderColor])
+        attributedPlaceholder   = attrPlaceholder
+        self.textColor          = textColor
+        self.font               = font == nil ? placeholderFont : font
+        self.textAlignment      = alignment
+        self.tintColor          = placeholderColor
+        self.keyboardType       = keyboardType
+        self.clearButtonMode    = clearButtonMode
+        
+        let imageView = UIImageView(image: UIImage(named: leftImage))
+        imageView.frame = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
+        imageView.contentMode = .center
+        self.leftView = imageView
+        self.leftViewMode = .always
+        
+    }
+
 }

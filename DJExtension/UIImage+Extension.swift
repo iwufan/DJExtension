@@ -20,6 +20,34 @@ extension UIImage {
 
         return image.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
     }
+    /// gradient image
+    class func gradientImage(_ rect: CGRect, _ startPoint: CGPoint, _ endPoint: CGPoint, _ startColor: UIColor, _ endColor: UIColor) -> UIImage {
+        
+        let ciFilter = CIFilter(name: "CILinearGradient")
+        
+        let vector0 = CIVector(x: rect.size.width * startPoint.x, y: rect.size.height * (1 - startPoint.y))
+        let vector1 = CIVector(x: rect.size.width * endPoint.x, y: rect.size.height * (1 - endPoint.y))
+
+        ciFilter?.setValue(vector0, forKey: "inputPoint0")
+        ciFilter?.setValue(vector1, forKey: "inputPoint1")
+
+        ciFilter?.setValue(CIColor(cgColor: startColor.cgColor), forKey: "inputColor0")
+        ciFilter?.setValue(CIColor(cgColor: endColor.cgColor), forKey: "inputColor1")
+
+        let context = CIContext(options: nil)
+        
+        guard let ciImage = ciFilter?.outputImage else {
+            return UIImage()
+        }
+        
+        guard let resultCGImage = context.createCGImage(ciImage, from: rect) else {
+            return UIImage()
+        }
+        
+        let resultUIImage = UIImage(cgImage: resultCGImage)
+        return resultUIImage
+
+    }
 }
 
 // MARK: - instance method

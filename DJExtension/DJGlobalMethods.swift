@@ -83,7 +83,7 @@ func dj_adapterValue(_ value: CGFloat) -> CGFloat {
 /// - Returns: number
 func dj_number(_ rawValue: Int) -> NSNumber {
     
-    return NSNumber.init(value: rawValue)
+    return NSNumber(value: rawValue)
 }
 
 // MARK: - Font
@@ -97,6 +97,12 @@ func dj_font(_ fontSize: CGFloat) -> UIFont {
 func dj_boldFont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont.boldSystemFont(ofSize: fontSize)
+}
+
+// MARK: - Image
+func dj_image(_ imageName: String) -> UIImage {
+    
+    return UIImage(named: imageName)!
 }
 
 // MARK: - Userdefaults
@@ -149,7 +155,7 @@ func dj_isEmptyString(_ obj: AnyObject?) -> Bool {
 /// - Returns: true = 是
 func dj_isIPhoneX() -> Bool {
     
-    return djScreenHeight == 812
+    return djScreenHeight >= 812
 }
 
 // MARK: - Date
@@ -159,7 +165,7 @@ func dj_isIPhoneX() -> Bool {
 ///   - date: a Date object
 ///   - format: format
 /// - Returns: date string
-func dj_getFormattedDate(date: Date, format: String = "yyyy/MM/dd") -> String {
+func dj_getFormattedDate(date: Date, format: String = "yyyy-MM-dd") -> String {
     
     let formatter = DateFormatter()
     formatter.dateFormat = format
@@ -171,7 +177,7 @@ func dj_getFormattedDate(date: Date, format: String = "yyyy/MM/dd") -> String {
 ///
 /// - Parameter timeStamp: timestamp
 /// - Returns: date string
-func dj_getDateFromTimeStamp(timeStamp: Int, format: String = "yyyy/MM/dd") -> String? {
+func dj_getDateFromTimeStamp(timeStamp: Int, format: String = "yyyy-MM-dd") -> String? {
     
     let date = Date(timeIntervalSince1970: TimeInterval(timeStamp / 1000))
     
