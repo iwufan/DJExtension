@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
   s.author 	= {'jiadawei' => 'jiadawei80@126.com'}
   s.ios.deployment_target = '8.0'
-  s.source	= {:git => 'https://github.com/iwufan/DJExtension.git', :tag => s.version}
+  s.source	= {:git => 'https://github.com/iwufan/DJExtension.git', :tag => '1.1.0'}
   s.source_files = 'DJExtension/**/*.{swift}'
   s.requires_arc = true
   s.frameworks	= 'UIKit', 'AVFoundation', 'Photos'
   s.dependency 'SnapKit'
-  
+
 end
