@@ -228,8 +228,12 @@ public func dj_callPhone(_ phoneNumber: String?) {
         return
     }
     
-    dj_openURL(url: url) { (res) in
-        print("call phone number \(phoneNumber) - \(res)")
+    if #available(iOS 10.0, *) {
+        dj_openURL(url: url) { (res) in
+            print("call phone number \(phoneNumber) - \(res)")
+        }
+    } else {
+        UIApplication.shared.openURL(url)
     }
 }
 
