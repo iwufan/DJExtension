@@ -234,6 +234,7 @@ public func dj_callPhone(_ phoneNumber: String?) {
 }
 
 // MARK: - open url
+@available(iOS 10.0, *)
 public func dj_openURL(url: URL?, completion:((Bool) -> Void)?) {
     
     guard let url = url else {
@@ -242,11 +243,7 @@ public func dj_openURL(url: URL?, completion:((Bool) -> Void)?) {
     }
     
     if UIApplication.shared.canOpenURL(url) {
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler: completion)
-        } else {
-            UIApplication.shared.openURL(url)
-        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
     }
 }
 
