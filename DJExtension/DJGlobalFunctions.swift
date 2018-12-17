@@ -241,7 +241,13 @@ public func dj_openURL(url: URL?, completion:((Bool) -> Void)?) {
         return
     }
     
-    UIApplication.shared.open(url, options: [:], completionHandler: completion)
+    if UIApplication.shared.canOpenURL(url) {
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: completion)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
 }
 
 // MARK: - keyboard
