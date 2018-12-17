@@ -12,7 +12,7 @@ extension UIColor {
     /**
      get alpha color with hex string
      */
-    class func dj_hex(_ value: String, alpha: CGFloat = 1.0) -> UIColor {
+    public class func dj_hex(_ value: String, alpha: CGFloat = 1.0) -> UIColor {
     
         var cString: String = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         

@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import SnapKit
 
 /// init method
 extension UITextField {
 
-    /// quick way to create a textfield
-    convenience init (placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing) {
+    /// quick way to create a textfield with super view
+    @discardableResult
+    public convenience init (placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, superView: UIView, closure: (ConstraintMaker) -> Void) {
         
         self.init()
         
@@ -26,14 +28,19 @@ extension UITextField {
         self.tintColor          = placeholderColor
         self.keyboardType       = keyboardType
         self.clearButtonMode    = clearButtonMode
+        
+        superView.addSubview(self)
+        
+        self.snp.makeConstraints(closure)
     }
-    /// quick way to create a textfield with leftImageView
-    convenience init(placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, leftImage: String, imageSize: CGSize) {
+    
+    /// quick way to create a textfield with leftImageView and super view
+    public convenience init(placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, leftImage: String, imageSize: CGSize, superView: UIView, closure: (ConstraintMaker) -> Void) {
         
         self.init()
-    
+        
         let rangeDict           = [djRangeLocation: "0", djRangeLength: "\(placeholder.count)"] as [String : Any]
-
+        
         let attrPlaceholder     = placeholder.dj_attributedString(rangeArray: [rangeDict], fontArray: [placeholderFont], colorArray: [placeholderColor])
         attributedPlaceholder   = attrPlaceholder
         self.textColor          = textColor
@@ -49,6 +56,9 @@ extension UITextField {
         self.leftView = imageView
         self.leftViewMode = .always
         
+        superView.addSubview(self)
+        
+        self.snp.makeConstraints(closure)
     }
 
 }

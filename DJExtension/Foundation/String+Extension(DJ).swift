@@ -15,7 +15,7 @@ extension String {
     ///
     /// - Parameter lineSpace:
     /// - Returns: string with line space
-    func dj_attributedStringWithLineSpace(_ lineSpace: CGFloat) -> NSMutableAttributedString {
+    public func dj_attributedStringWithLineSpace(_ lineSpace: CGFloat) -> NSMutableAttributedString {
         
         let attrContent = NSMutableAttributedString(string: self)
         
@@ -27,7 +27,7 @@ extension String {
         return attrContent
     }
     /// convert a String to attributed string with parameters
-    func dj_attributedString(rangeArray: Array<Dictionary<String, Any>>, fontArray: Array<UIFont>, colorArray: Array<UIColor>, lineSpacing: CGFloat = 0) -> NSMutableAttributedString {
+    public func dj_attributedString(rangeArray: Array<Dictionary<String, Any>>, fontArray: Array<UIFont>, colorArray: Array<UIColor>, lineSpacing: CGFloat = 0) -> NSMutableAttributedString {
     
         // if rangeArray is empty, return self
         if rangeArray.count == 0 {
@@ -65,12 +65,12 @@ extension String {
 // MARK: - Clip String
 extension String {
 
-    func dj_substringTo(_ offset: Int) -> String {
+    public func dj_substringTo(_ offset: Int) -> String {
         
         return String(prefix(offset))
     }
     
-    func dj_substringFrom(_ offset: Int) -> String {
+    public func dj_substringFrom(_ offset: Int) -> String {
         
         let indexFrom = index(startIndex, offsetBy: offset)
         return String(self[indexFrom...])
@@ -81,9 +81,9 @@ extension String {
 
     /// calculate size with maxsize and font
     /// - Returns: size
-    func dj_size(maxWidth: CGFloat, maxHeight: CGFloat, fontSize: CGFloat) -> CGSize {
+    public func dj_size(maxWidth: CGFloat, maxHeight: CGFloat, font: UIFont) -> CGSize {
     
-        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: dj_font(fontSize)], context: nil).size
+        return self.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil).size
     }
 }
 
@@ -91,62 +91,57 @@ extension String {
     
     /// remove all the space
     ///
-    /// - Returns: 无空格的字符串
-    func dj_clearSpace() -> String {
+    /// - Returns: a string without space
+    public func dj_clearSpace() -> String {
         
         return replacingOccurrences(of: " ", with: "")
+    }
+    /// remove the last symbol
+    public func dj_removeLastSymbol() -> String {
+        
+        if self.count > 1 {
+            return dj_substringTo(self.count - 1)
+        } else {
+            return self
+        }
     }
 }
 
 extension String {
     
-    func dj_isInt() -> Bool {
+    public func dj_isInt() -> Bool {
         
         let scan = Scanner(string: self)
         var val:Int = 0
         
         return scan.scanInt(&val) && scan.isAtEnd
     }
-}
-
-extension String {
-    
-    /// convert a number to chinese string
-    func dj_chineseNumber() -> String {
+    /// it'll return false if the text are emojis or other special characters.
+    public func dj_isInputValid() -> Bool {
         
-        if !self.dj_isInt() {
-            return self
+        let pattern = "^[a-zA-Z0-9\\u4E00-\\u9FA5]*$"
+        let pred  = NSPredicate(format: "SELF MATCHES %@", pattern)
+        
+        let isMatch = pred.evaluate(with: self)
+        
+        if isMatch || self == "" || "➋➌➍➎➏➐➑➒".contains(self) {
+            return true
         }
         
-        var chineseStr = ""
-
-        switch Int(self)! {
-            case 0:
-                chineseStr = "零"
-            case 1:
-                chineseStr = "一"
-            case 2:
-                chineseStr = "二"
-            case 3:
-                chineseStr = "三"
-            case 4:
-                chineseStr = "四"
-            case 5:
-                chineseStr = "五"
-            case 6:
-                chineseStr = "六"
-            case 7:
-                chineseStr = "七"
-            case 8:
-                chineseStr = "八"
-            case 9:
-                chineseStr = "九"
-            case 10:
-                chineseStr = "十"
-            default:
-                chineseStr = self
+        return false
+    }
+    /// it'll return false if the text are emojis.
+    public func dj_isInputValidWithSymbols() -> Bool {
+        
+        let pattern = "^[a-zA-Z0-9\\u4E00-\\u9FA5\\.\\,\\?\\!\\。\\，\\、\\！\\？\\：\\“\\”\\（\\）\\……\\*\\·\\~\\@\\#\\￥\\%\\&\\-\\[\\]\\《\\》\\‘\\’\\|\\ \\{\\}\\$\\^\\(\\)\\<\\>\\;\\:\\+\\_\\=\\`\\'\\\"\\/\\——\\【\\】]*$"
+        let pred  = NSPredicate(format: "SELF MATCHES %@", pattern)
+        
+        let isMatch = pred.evaluate(with: self)
+        
+        if isMatch || self == "" || "➋➌➍➎➏➐➑➒".contains(self) {
+            return true
         }
         
-        return chineseStr
+        return false
     }
 }

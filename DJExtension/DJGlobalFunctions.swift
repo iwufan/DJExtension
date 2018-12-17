@@ -6,8 +6,9 @@
 //  Copyright © 2017 David Jia. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import AVFoundation
+import Photos
 
 let djScreenStandardWidth = 375     // standard width as iPhone 6.
 
@@ -19,51 +20,21 @@ let djScreenStandardWidth = 375     // standard width as iPhone 6.
 ///   - hex: 16 system
 ///   - alpha: alpha
 /// - Returns: UIColor
-func dj_hexColor(_ hex: String, alpha: CGFloat = 1.0) ->UIColor{
+public func dj_hexColor(_ hex: String, alpha: CGFloat = 1.0) ->UIColor{
     
     return UIColor.dj_hex(hex, alpha: alpha)
 }
 
 /// get gray color
-func dj_rgbGrayColor(_ value: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
+public func dj_rgbGrayColor(_ value: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
     
     return UIColor(red: value / 255.0, green: value / 255.0, blue: value / 255.0, alpha: alpha)
 }
 
 /// get rgb color
-func dj_rgbColor(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
+public func dj_rgbColor(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1.0) ->UIColor{
     
     return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: alpha)
-}
-
-// MARK: - Screen
-
-/// screen type
-///
-/// - small: type of 4, 4s, 5, 5s, 5c, se, iPod
-/// - normal: type of 6, 6s, 7
-/// - plus: type of 6p, 6sp, 7p
-public enum DJScreenType : Int {
-    
-    case small
-    case normal
-    case plus
-}
-
-/// get screen type
-///
-/// - Returns: screen type
-func dj_screenType() -> DJScreenType{
-    
-    let screenWidth = UIScreen.main.bounds.width
-    
-    if screenWidth < 330 {
-        return .small
-    } else if screenWidth > 380 {
-        return .plus
-    } else {
-        return .normal
-    }
 }
 
 // MARK: - Adapt
@@ -71,7 +42,7 @@ func dj_screenType() -> DJScreenType{
 ///
 /// - Parameter value: standard value
 /// - Returns: adapter value
-func dj_adapterValue(_ value: CGFloat) -> CGFloat {
+public func dj_adapterValue(_ value: CGFloat) -> CGFloat {
     
     return value * djScreenWidth / CGFloat(djScreenStandardWidth)
 }
@@ -81,7 +52,7 @@ func dj_adapterValue(_ value: CGFloat) -> CGFloat {
 ///
 /// - Parameter rawValue: int
 /// - Returns: number
-func dj_number(_ rawValue: Int) -> NSNumber {
+public func dj_number(_ rawValue: Int) -> NSNumber {
     
     return NSNumber(value: rawValue)
 }
@@ -89,20 +60,52 @@ func dj_number(_ rawValue: Int) -> NSNumber {
 // MARK: - Font
 
 /// setup font
-func dj_font(_ fontSize: CGFloat) -> UIFont {
+public func dj_systemfont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont.systemFont(ofSize: fontSize)
 }
 /// setup bold font
-func dj_boldFont(_ fontSize: CGFloat) -> UIFont {
+public func dj_boldSystemFont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont.boldSystemFont(ofSize: fontSize)
 }
+/// setup pingfangsc-regular font
+public func dj_pingRegularFont(_ fontSize: CGFloat) -> UIFont {
+    
+    return UIFont(name: "PingFangSC-Regular", size: fontSize)!
+}
+/// setup pingfangsc-medium font
+public func dj_pingMediumFont(_ fontSize: CGFloat) -> UIFont {
+    
+    return UIFont(name: "PingFangSC-Medium", size: fontSize)!
+}
+/// setup pingfangsc-semibold font
+public func dj_pingSemiboldFont(_ fontSize: CGFloat) -> UIFont {
+    
+    return UIFont(name: "PingFangSC-Semibold", size: fontSize)!
+}
 
 // MARK: - Image
-func dj_image(_ imageName: String) -> UIImage {
+public func dj_image(_ imageName: String) -> UIImage {
     
-    return UIImage(named: imageName)!
+    guard let image = UIImage(named: imageName) else {
+        return UIImage()
+    }
+    
+    return image
+}
+
+// MARK: - Camera/PhotoLibrary
+// camera authorization
+public func dj_isCameraAllowed() -> Bool {
+    
+    let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+    return authStatus != .restricted && authStatus != .denied
+}
+// photo library authorization
+public func dj_isPhotoLibraryAllowed() -> Bool {
+    let authStatus = PHPhotoLibrary.authorizationStatus()
+    return authStatus != .restricted && authStatus != .denied
 }
 
 // MARK: - Userdefaults
@@ -110,13 +113,13 @@ func dj_image(_ imageName: String) -> UIImage {
 ///
 /// - Parameter key: key
 /// - Returns: value
-func dj_userdefaults(_ key: String) -> String? {
+public func dj_userdefaults(_ key: String) -> String? {
     
     return UserDefaults.standard.value(forKey: key) as? String
 }
 
 // MARK: - height of navigation bar
-func dj_navigationBarHeight() -> CGFloat {
+public func dj_navigationBarHeight() -> CGFloat {
     
     let statusHeight = UIApplication.shared.statusBarFrame.height
     return statusHeight + 44
@@ -127,7 +130,7 @@ func dj_navigationBarHeight() -> CGFloat {
 ///
 /// - Parameter object: string
 /// - Returns: true = empty, false = not empty
-func dj_isEmpty(_ obj: AnyObject?) -> Bool {
+public func dj_isEmpty(_ obj: AnyObject?) -> Bool {
     
     if obj == nil || (obj?.isKind(of: NSNull.self))! {
         return true
@@ -139,7 +142,7 @@ func dj_isEmpty(_ obj: AnyObject?) -> Bool {
 ///
 /// - Parameter object: string
 /// - Returns: true = empty, false = not empty
-func dj_isEmptyString(_ obj: AnyObject?) -> Bool {
+public func dj_isEmptyString(_ obj: AnyObject?) -> Bool {
     
     if obj == nil || (obj?.isKind(of: NSNull.self))! {
         return true
@@ -153,7 +156,7 @@ func dj_isEmptyString(_ obj: AnyObject?) -> Bool {
 /// whether a iPhoneX, XS, XS Max or not
 ///
 /// - Returns: true = 是
-func dj_isIPhoneX() -> Bool {
+public func dj_isIPhoneX() -> Bool {
     
     return djScreenHeight >= 812
 }
@@ -165,7 +168,7 @@ func dj_isIPhoneX() -> Bool {
 ///   - date: a Date object
 ///   - format: format
 /// - Returns: date string
-func dj_getFormattedDate(date: Date, format: String = "yyyy-MM-dd") -> String {
+public func dj_getFormattedDate(date: Date, format: String = "yyyy-MM-dd") -> String {
     
     let formatter = DateFormatter()
     formatter.dateFormat = format
@@ -177,7 +180,7 @@ func dj_getFormattedDate(date: Date, format: String = "yyyy-MM-dd") -> String {
 ///
 /// - Parameter timeStamp: timestamp
 /// - Returns: date string
-func dj_getDateFromTimeStamp(timeStamp: Int, format: String = "yyyy-MM-dd") -> String? {
+public func dj_getDateFromTimeStamp(timeStamp: Int, format: String = "yyyy-MM-dd") -> String? {
     
     let date = Date(timeIntervalSince1970: TimeInterval(timeStamp / 1000))
     
@@ -190,7 +193,7 @@ func dj_getDateFromTimeStamp(timeStamp: Int, format: String = "yyyy-MM-dd") -> S
 ///   - dateStr: date string
 ///   - format: format
 /// - Returns: timestamp
-func dj_getTimeStampFromDateString(dateStr: String, format: String) -> Double? {
+public func dj_getTimeStampFromDateString(dateStr: String, format: String) -> Double? {
     
     let formatter = DateFormatter()
     formatter.dateFormat = format
@@ -205,9 +208,52 @@ func dj_getTimeStampFromDateString(dateStr: String, format: String) -> Double? {
     return timestamp
 }
 
+// MARK: - json
+public func dj_toJson(object:Any) -> String? {
+    
+    do {
+        let data = try JSONSerialization.data(withJSONObject: object, options: JSONSerialization.WritingOptions.prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8)
+    } catch {
+        print(error)
+        return nil
+    }
+}
+
+// MARK: - call
+public func dj_callPhone(_ phoneNumber: String?) {
+    
+    guard let phoneNumber = phoneNumber, let url = URL(string: "tel://\(phoneNumber)") else {
+        print("this phone number is not valid.")
+        return
+    }
+    
+    dj_openURL(url: url) { (res) in
+        print("call phone number \(phoneNumber) - \(res)")
+    }
+}
+
+// MARK: - open url
+public func dj_openURL(url: URL?, completion:((Bool) -> Void)?) {
+    
+    guard let url = url else {
+        print("the open url is nil")
+        return
+    }
+    
+    UIApplication.shared.open(url, options: [:], completionHandler: completion)
+}
+
+// MARK: - keyboard
+/// hide keyboard
+public func dj_hideKeyboard() {
+    
+    UIApplication.shared.keyWindow?.endEditing(true)
+}
+
 // MARK: - Property value
 // convert a value to int
-func dj_getInt(_ value: Any?) -> Int! {
+public func dj_getInt(_ value: Any?) -> Int! {
     
     if (value as AnyObject).isKind(of: NSNull.self) || dj_isEmpty(value as AnyObject) {
         return nil
@@ -216,58 +262,12 @@ func dj_getInt(_ value: Any?) -> Int! {
     }
 }
 // convert a value to string
-func dj_getString(_ value: Any?) -> String! {
+public func dj_getString(_ value: Any?) -> String! {
     
     if (value as AnyObject).isKind(of: NSNull.self) || (value as? String) == nil || dj_isEmpty(value as AnyObject) {
         return nil
     } else {
         return value as? String
-    }
-}
-
-/// archive a object
-///
-/// - Parameters:
-///   - name: archive name
-///   - obj: the object to be archived
-func dj_archiveFile(name: String, obj: Any) {
-    
-    let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
-    let path = (docPath! as NSString).appendingPathComponent(name)
-    
-    if #available(iOS 12.0, *) {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: obj, requiringSecureCoding: true)
-            try data.write(to: URL(fileURLWithPath: path))
-        } catch {
-            print("archive - failed")
-        }
-    } else {
-        NSKeyedArchiver.archiveRootObject(obj, toFile: path)
-    }
-}
-
-/// unarchive a object
-///
-/// - Parameter name: file name
-/// - Returns: an object
-func dj_unarchiveFile(name: String) -> Any? {
-    
-    let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
-    let path = (docPath! as NSString).appendingPathComponent(name)
-    
-    if #available(iOS 12.0, *) {
-        do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: path))
-            let obj = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [AnyObject.self], from: data)
-            
-            return obj
-        } catch {
-            print("unarchive - failed")
-            return nil
-        }
-    } else {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
     }
 }
 
@@ -277,7 +277,7 @@ func dj_unarchiveFile(name: String) -> Any? {
 /// - Parameters:
 ///   - url: internet url
 ///   - fileName: file name
-func dj_saveFile(url: String, fileName: String) {
+public func dj_saveFile(url: String, fileName: String) {
     
     if dj_isEmptyString(url as AnyObject) {
         return
@@ -298,7 +298,7 @@ func dj_saveFile(url: String, fileName: String) {
 ///
 /// - Parameters:
 ///   - fileName: file name
-func dj_deleteFile(fileName: String) {
+public func dj_deleteFile(fileName: String) {
     
     let fileManager = FileManager()
     
@@ -322,7 +322,7 @@ func dj_deleteFile(fileName: String) {
 /// - Parameters:
 ///   - fileName: file name
 /// - Returns: true = exist
-func dj_checkFileExist(fileName: String) -> Bool {
+public func dj_checkFileExist(fileName: String) -> Bool {
     
     let fileManager = FileManager()
     
@@ -339,7 +339,7 @@ func dj_checkFileExist(fileName: String) -> Bool {
     }
 }
 /// get file path in sandbox
-func dj_getPathInSandBox(fileName: String) -> URL {
+public func dj_getPathInSandBox(fileName: String) -> URL {
     
     let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
     let copyPath = (docPath! as NSString).appendingPathComponent(fileName)
@@ -349,12 +349,12 @@ func dj_getPathInSandBox(fileName: String) -> URL {
 
 // MARK: - Notification
 /// Post a notification
-func dj_postNotification(name: String, obj: Any? = nil, userInfo: [AnyHashable : Any]? = nil) {
+public func dj_postNotification(name: String, obj: Any? = nil, userInfo: [AnyHashable : Any]? = nil) {
     
     NotificationCenter.default.post(name: NSNotification.Name(rawValue:name) , object: obj, userInfo: userInfo)
 }
 /// Observer a notification
-func dj_addObserver(observer: Any, selector: Selector, name: String, obj: Any? = nil) {
+public func dj_addObserver(observer: Any, selector: Selector, name: String, obj: Any? = nil) {
     
     NotificationCenter.default.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: name), object: obj)
 }

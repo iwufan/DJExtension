@@ -11,7 +11,7 @@ import UIKit
 extension NSAttributedString {
 
     /// quick way to create a attribute string
-    class func dj_init(string: String, fontSize: CGFloat, color: UIColor) -> NSAttributedString {
+    public class func dj_init(string: String, fontSize: CGFloat, color: UIColor) -> NSAttributedString {
     
         let attrString = NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize), NSAttributedString.Key.foregroundColor: color])
         
