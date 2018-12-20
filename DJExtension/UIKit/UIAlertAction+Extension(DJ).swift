@@ -10,7 +10,7 @@ import UIKit
 
 extension UIAlertAction {
     // set color for the title
-    func titleColor(_ color: UIColor) {
+    public func titleColor(_ color: UIColor) {
         setValue(color, forKey: "titleTextColor")
     }
 }
