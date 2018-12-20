@@ -1,5 +1,7 @@
 # DJExtension
 Extensions, global functions for swift. Create a component with one line of codes.
+
+10 times to improve your code efficiency.
 ### Main Features!
 - Create a component with one line of codes, like a label, button, textField...
 - Use global functions instead of some Apple APIs.
