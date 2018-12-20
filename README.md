@@ -7,10 +7,10 @@ Extensions, global functions for swift. Create a component with one line of code
 - Use global functions instead of some Apple APIs.
 - Make many extensions and convenience init methods for UILabel/UIButton/UIView/UIViewController/UIImage...
 ### How To Install?
-- Manual
+##### Manual
 Just drag the `DJExtension` folder to your project. 
 This is what all you should do, then you can use the extension functions. All the functions or constants are start with `dj`.
-- Cocoapods
+##### Cocoapods
 `pod 'DJExtension'`
 You should also import this framework before you use it, like this `import DJExtension`.
 ### The reason to use DJExtension
