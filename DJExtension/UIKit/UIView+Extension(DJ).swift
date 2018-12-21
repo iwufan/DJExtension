@@ -91,12 +91,15 @@ extension UIView {
 
 extension UIView {
     /// set corner radius
-    public func dj_setCornerRadius(radius: CGFloat, borderWidth: CGFloat = 0.5, borderColor: UIColor) {
+    public func dj_setCornerRadius(radius: CGFloat, borderWidth: CGFloat = 0.5, borderColor: UIColor? = nil) {
         
         layer.cornerRadius = radius
         layer.masksToBounds = true
-        layer.borderWidth = borderWidth
-        layer.borderColor = borderColor.cgColor
+        
+        if let color = borderColor {
+            layer.borderWidth = borderWidth
+            layer.borderColor = color.cgColor
+        }
     }
 }
 
