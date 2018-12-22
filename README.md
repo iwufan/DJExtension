@@ -162,5 +162,5 @@ MIT
 ### Contact Me
 [悟饭哪](https://www.jianshu.com/u/819830158b47)
 
-###### 感谢支持
+###### Thanks
 
