@@ -9,9 +9,11 @@ Extensions, global functions for swift. Create a component with one line of code
 ### How To Install?
 ##### Manual
 Just drag the `DJExtension` folder to your project. 
+
 This is what all you should do, then you can use the extension functions. All the functions or constants are start with `dj`.
 ##### Cocoapods
 `pod 'DJExtension'`
+
 You should also import this framework before you use it, like this `import DJExtension`.
 ### The reason to use DJExtension
 With DJExtension, you won't need to write duplicate and redundant codes in your projects. Here are some examples.
@@ -162,5 +164,5 @@ MIT
 ### Contact Me
 [悟饭哪](https://www.jianshu.com/u/819830158b47)
 
-###### 感谢支持
+###### Thanks
 
