@@ -59,13 +59,13 @@ public func dj_number(_ rawValue: Int) -> NSNumber {
 
 // MARK: - Font
 
-/// setup font
-public func dj_systemfont(_ fontSize: CGFloat) -> UIFont {
+/// setup system font
+public func dj_font(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont.systemFont(ofSize: fontSize)
 }
-/// setup bold font
-public func dj_boldSystemFont(_ fontSize: CGFloat) -> UIFont {
+/// setup bold system font
+public func dj_boldFont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont.boldSystemFont(ofSize: fontSize)
 }
