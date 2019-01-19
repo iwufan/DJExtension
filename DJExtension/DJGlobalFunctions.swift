@@ -70,17 +70,17 @@ public func dj_boldFont(_ fontSize: CGFloat) -> UIFont {
     return UIFont.boldSystemFont(ofSize: fontSize)
 }
 /// setup pingfangsc-regular font
-public func dj_pingRegularFont(_ fontSize: CGFloat) -> UIFont {
+public func dj_regularFont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont(name: "PingFangSC-Regular", size: fontSize)!
 }
 /// setup pingfangsc-medium font
-public func dj_pingMediumFont(_ fontSize: CGFloat) -> UIFont {
+public func dj_mediumFont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont(name: "PingFangSC-Medium", size: fontSize)!
 }
 /// setup pingfangsc-semibold font
-public func dj_pingSemiboldFont(_ fontSize: CGFloat) -> UIFont {
+public func dj_semiboldFont(_ fontSize: CGFloat) -> UIFont {
     
     return UIFont(name: "PingFangSC-Semibold", size: fontSize)!
 }
