@@ -11,6 +11,7 @@ import SnapKit
 
 extension UIImageView {
     
+    @discardableResult
     public convenience init(image: UIImage?, superView: UIView, closure: (ConstraintMaker) -> Void) {
         
         self.init()

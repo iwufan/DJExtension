@@ -35,6 +35,7 @@ extension UITextField {
     }
     
     /// quick way to create a textfield with leftImageView and super view
+    @discardableResult
     public convenience init(placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, leftImage: String, imageSize: CGSize, superView: UIView, closure: (ConstraintMaker) -> Void) {
         
         self.init()

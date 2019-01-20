@@ -12,12 +12,14 @@ import SnapKit
 extension UITableView {
     
     /// quick way to create a tableView with super view
-    public convenience init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, showIndicator: Bool = false, separatorStyle: UITableViewCell.SeparatorStyle = .none, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    @discardableResult
+    public convenience init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, rowHeight: CGFloat, showIndicator: Bool = false, separatorStyle: UITableViewCell.SeparatorStyle = .none, superView: UIView, closure: (ConstraintMaker) -> Void) {
         
         self.init()
         
         self.dataSource                 = dataSource
         self.delegate                   = delegate
+        self.rowHeight                  = rowHeight
         self.separatorStyle             = separatorStyle
         showsVerticalScrollIndicator    = showIndicator
         showsHorizontalScrollIndicator  = showIndicator
