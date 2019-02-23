@@ -14,7 +14,7 @@ extension UILabel {
     
     /// quick way to create a label with super view
     @discardableResult
-    public convenience init (text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init (text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
@@ -24,9 +24,13 @@ extension UILabel {
         textAlignment = alignment
         numberOfLines = lineCount
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
     
 }
@@ -43,12 +47,12 @@ extension UILabel {
         textAlignment = alignment
         numberOfLines = lineCount
         
-        guard let superView = superView, let closure = closure else {
-            return
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
         }
-        
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
     }
 }

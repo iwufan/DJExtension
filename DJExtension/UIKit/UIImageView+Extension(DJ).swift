@@ -12,14 +12,18 @@ import SnapKit
 extension UIImageView {
     
     @discardableResult
-    public convenience init(image: UIImage?, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init(image: UIImage?, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
         self.image = image
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
 }

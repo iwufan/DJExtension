@@ -16,25 +16,33 @@ extension UIView {
     
     /// quick way to create a view with background color and super view
     @discardableResult
-    public convenience init (backgroundColor: UIColor, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init (backgroundColor: UIColor, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
         self.backgroundColor = backgroundColor
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
     /// quick way to create a view with super view
     @discardableResult
-    public convenience init (superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init (superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
 
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
     
 }

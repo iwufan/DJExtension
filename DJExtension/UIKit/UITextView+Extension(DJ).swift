@@ -14,7 +14,7 @@ extension UITextView {
     
     /// quick way to create a text view with super view
     @discardableResult
-    public convenience init (textColor: UIColor, font: UIFont, keyboardType: UIKeyboardType = .default, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init (textColor: UIColor, font: UIFont, keyboardType: UIKeyboardType = .default, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
@@ -22,9 +22,13 @@ extension UITextView {
         self.font = font
         self.keyboardType = keyboardType
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
 }
 
@@ -36,10 +40,12 @@ extension UITextView {
         self.font = font
         self.keyboardType = keyboardType
         
-        if let superView = superView, let closure = closure {
-            superView.addSubview(self)
+        if let sView = superView {
+            sView.addSubview(self)
             
-            self.snp.makeConstraints(closure)
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
         }
     }
 }

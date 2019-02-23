@@ -14,7 +14,7 @@ extension UITextField {
 
     /// quick way to create a textfield with super view
     @discardableResult
-    public convenience init (placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init (placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
@@ -29,14 +29,18 @@ extension UITextField {
         self.keyboardType       = keyboardType
         self.clearButtonMode    = clearButtonMode
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
     
     /// quick way to create a textfield with leftImageView and super view
     @discardableResult
-    public convenience init(placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, leftImage: String, imageSize: CGSize, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init(placeholder: String, placeholderColor: UIColor, placeholderFont: UIFont, textColor: UIColor, font: UIFont? = nil, alignment: NSTextAlignment = .left, keyboardType: UIKeyboardType = .default, clearButtonMode: UITextField.ViewMode = .whileEditing, leftImage: String, imageSize: CGSize, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
@@ -57,9 +61,13 @@ extension UITextField {
         self.leftView = imageView
         self.leftViewMode = .always
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
 
 }

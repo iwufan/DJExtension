@@ -118,6 +118,13 @@ public func dj_userdefaults(_ key: String) -> String? {
     return UserDefaults.standard.value(forKey: key) as? String
 }
 
+// MARK: - height of status bar
+public func dj_statusBarHeight() -> CGFloat {
+    
+    let statusHeight = UIApplication.shared.statusBarFrame.height
+    return statusHeight
+}
+
 // MARK: - height of navigation bar
 public func dj_navigationBarHeight() -> CGFloat {
     

@@ -14,7 +14,7 @@ extension UIButton {
     
     /// quick way to create a button with images and super view
     @discardableResult
-    public convenience init (normalImage: UIImage? = nil, selectedImage: UIImage? = nil, backgroundImage: UIImage? = nil, selBgImage: UIImage? = nil, target: Any? = nil, action: Selector? = nil, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init (normalImage: UIImage? = nil, selectedImage: UIImage? = nil, backgroundImage: UIImage? = nil, selBgImage: UIImage? = nil, target: Any? = nil, action: Selector? = nil, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
@@ -22,20 +22,23 @@ extension UIButton {
         setImage(selectedImage, for: .selected)
         setBackgroundImage(backgroundImage, for: .normal)
         setBackgroundImage(selBgImage, for: .selected)
-        
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
-        
-        guard let action = action else {
-            return
+    
+        if let action = action else {
+            addTarget(target, action: action, for: .touchUpInside)
         }
-        addTarget(target, action: action, for: .touchUpInside)
+        
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
     
     /// quick way to create a button with title/fontSize/TitleColor/selTitleColor/bgColor and super view
     @discardableResult
-    public convenience init (title: String, selTitle: String? = nil, titleFont: UIFont, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), target: Any? = nil, action: Selector? = nil, superView: UIView, closure: (ConstraintMaker) -> Void)  {
+    public convenience init (title: String, selTitle: String? = nil, titleFont: UIFont, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), target: Any? = nil, action: Selector? = nil, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil)  {
         
         self.init()
         
@@ -47,20 +50,22 @@ extension UIButton {
         backgroundColor = bgColor
         titleEdgeInsets = titleOffset
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
-        
-        guard let action = action else {
-            return
+        if let action = action else {
+            addTarget(target, action: action, for: .touchUpInside)
         }
 
-        addTarget(target, action: action, for: .touchUpInside)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
     
     /// quick way to create a button with title and image and super view
     @discardableResult
-    public convenience init (title: String, titleFont: UIFont, titleColor: UIColor, selTitleColor: UIColor? = nil, normalImage: UIImage, selectedImage: UIImage? = nil, titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), imageOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), target: Any? = nil, action: Selector? = nil, superView: UIView, closure: (ConstraintMaker) -> Void)  {
+    public convenience init (title: String, titleFont: UIFont, titleColor: UIColor, selTitleColor: UIColor? = nil, normalImage: UIImage, selectedImage: UIImage? = nil, titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), imageOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), target: Any? = nil, action: Selector? = nil, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil)  {
         
         self.init()
         
@@ -77,14 +82,17 @@ extension UIButton {
             setImage(selectedImage, for: .selected)
         }
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
-        
-        guard let action = action else {
-            return
+        if let action = action {
+            addTarget(target, action: action, for: .touchUpInside)
         }
-        addTarget(target, action: action, for: .touchUpInside)
+        
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
 }
 
@@ -102,15 +110,17 @@ extension UIButton {
         backgroundColor = bgColor
         titleEdgeInsets = titleOffset
         
-        if let superView = superView, let closure = closure {
-            superView.addSubview(self)
-            self.snp.makeConstraints(closure)
+        if let action = action {
+            addTarget(target, action: action, for: .touchUpInside)
         }
         
-        guard let action = action else {
-            return
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
         }
-        addTarget(target, action: action, for: .touchUpInside)
     }
     
     public func dj_setup(title: String) {
@@ -132,14 +142,16 @@ extension UIButton {
         setBackgroundImage(backgroundImage, for: .normal)
         setBackgroundImage(selBgImage, for: .selected)
         
-        if let superView = superView, let closure = closure {
-            superView.addSubview(self)
-            self.snp.makeConstraints(closure)
+        if let action = action {
+            addTarget(target, action: action, for: .touchUpInside)
         }
         
-        guard let action = action else {
-            return
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
         }
-        addTarget(target, action: action, for: .touchUpInside)
     }
 }

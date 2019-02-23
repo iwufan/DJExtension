@@ -13,7 +13,7 @@ extension UITableView {
     
     /// quick way to create a tableView with super view
     @discardableResult
-    public convenience init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, rowHeight: CGFloat, showIndicator: Bool = false, separatorStyle: UITableViewCell.SeparatorStyle = .none, superView: UIView, closure: (ConstraintMaker) -> Void) {
+    public convenience init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, rowHeight: CGFloat? = 0, showIndicator: Bool = false, separatorStyle: UITableViewCell.SeparatorStyle = .none, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
         
         self.init()
         
@@ -24,8 +24,12 @@ extension UITableView {
         showsVerticalScrollIndicator    = showIndicator
         showsHorizontalScrollIndicator  = showIndicator
         
-        superView.addSubview(self)
-        
-        self.snp.makeConstraints(closure)
+        if let sView = superView {
+            sView.addSubview(self)
+            
+            if let closure = closure {
+                self.snp.makeConstraints(closure)
+            }
+        }
     }
 }
