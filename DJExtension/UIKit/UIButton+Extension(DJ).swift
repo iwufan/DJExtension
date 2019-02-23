@@ -23,7 +23,7 @@ extension UIButton {
         setBackgroundImage(backgroundImage, for: .normal)
         setBackgroundImage(selBgImage, for: .selected)
     
-        if let action = action else {
+        if let action = action {
             addTarget(target, action: action, for: .touchUpInside)
         }
         
@@ -50,7 +50,7 @@ extension UIButton {
         backgroundColor = bgColor
         titleEdgeInsets = titleOffset
         
-        if let action = action else {
+        if let action = action {
             addTarget(target, action: action, for: .touchUpInside)
         }
 
