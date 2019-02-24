@@ -216,25 +216,17 @@ public func dj_getTimeStampFromDateString(dateStr: String, format: String) -> Do
 }
 
 // MARK: - json
-/// 转换的json带\n
+/// 对象转json字符串
 public func dj_toJson(_ object:Any) -> String? {
-    
-    do {
-        let data = try JSONSerialization.data(withJSONObject: object, options: JSONSerialization.WritingOptions.prettyPrinted)
-        return String(data: data, encoding: String.Encoding.utf8)
-    } catch {
-        print(error)
-        return nil
-    }
-}
-/// 转换的json不带\n
-public func dj_toPureJson(_ object:Any) -> String? {
     
     do {
         let data = try JSONSerialization.data(withJSONObject: object, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = String(data: data, encoding: String.Encoding.utf8)
         let string = jsonString?.replacingOccurrences(of: "\n", with: "")
-        return string
+        let string2 = string?.replacingOccurrences(of: "\\", with: "")
+        let string3 = string2?.replacingOccurrences(of: "\"[", with: "[")
+        let string4 = string3?.replacingOccurrences(of: "]\"", with: "]")
+        return string4
     } catch {
         print(error)
         return nil

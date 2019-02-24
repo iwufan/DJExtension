@@ -75,6 +75,20 @@ extension String {
         let indexFrom = index(startIndex, offsetBy: offset)
         return String(self[indexFrom...])
     }
+    /// get the location of a letter in a string
+    func dj_location(_ str: String) -> Int {
+        
+        var location = -1
+        
+        if let strRange = range(of: str, options: .literal) {
+            
+            if !strRange.isEmpty {
+                
+                location = self.distance(from: startIndex, to: strRange.lowerBound)
+            }
+        }
+        return location
+    }
 }
 
 extension String {

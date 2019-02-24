@@ -128,6 +128,11 @@ extension UIButton {
         setTitle(title, for: .normal)
     }
     
+    public func dj_setImage(_ name: String) {
+        
+        setImage(dj_image(name), for: .normal)
+    }
+    
     /// quick way to setup a button with target and action
     public func dj_addTarget(_ target: Any?, action: Selector) {
         
