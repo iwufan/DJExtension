@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name	= 'DJExtension'
-  s.version	= '1.3.2'
+  s.version	= '1.3.3'
   s.summary	= 'Extensions and globalFunctions for swift. Create components with one line of code.'
   s.homepage	= 'https://github.com/iwufan/DJExtension'
   s.license	= 'MIT'
