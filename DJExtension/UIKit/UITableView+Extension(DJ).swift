@@ -11,9 +11,9 @@ import SnapKit
 
 extension UITableView {
     
-    /// quick way to create a tableView with super view
+    /// create a tableView
     @discardableResult
-    public convenience init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, rowHeight: CGFloat = 0, showIndicator: Bool = false, separatorStyle: UITableViewCell.SeparatorStyle = .none, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
+    public convenience init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, rowHeight: CGFloat = 0, showIndicator: Bool = false, separatorStyle: UITableViewCell.SeparatorStyle = .none) {
         
         self.init()
         
@@ -23,13 +23,21 @@ extension UITableView {
         self.separatorStyle             = separatorStyle
         showsVerticalScrollIndicator    = showIndicator
         showsHorizontalScrollIndicator  = showIndicator
+    }
+    /// create a tableView with super view
+    @discardableResult
+    public convenience init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource, rowHeight: CGFloat = 0, showIndicator: Bool = false, separatorStyle: UITableViewCell.SeparatorStyle = .none, superView: UIView, closure: ((ConstraintMaker) -> Void)) {
         
-        if let sView = superView {
-            sView.addSubview(self)
-            
-            if let closure = closure {
-                self.snp.makeConstraints(closure)
-            }
-        }
+        self.init()
+        
+        self.dataSource                 = dataSource
+        self.delegate                   = delegate
+        self.rowHeight                  = rowHeight
+        self.separatorStyle             = separatorStyle
+        showsVerticalScrollIndicator    = showIndicator
+        showsHorizontalScrollIndicator  = showIndicator
+ 
+        superView.addSubview(self)
+        self.snp.makeConstraints(closure)
     }
 }

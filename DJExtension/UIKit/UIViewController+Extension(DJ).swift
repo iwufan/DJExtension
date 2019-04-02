@@ -12,14 +12,14 @@ public typealias djActionClosure = (UIAlertAction) -> Void
 
 extension UIViewController {
     
-    // quick way to push a new view controller
+    // push a new view controller
     public func dj_push(_ viewController: UIViewController) {
         guard let navigationController = navigationController else {
             return
         }
         navigationController.pushViewController(viewController, animated: true)
     }
-    // quick way to pop back to previous view controller
+    // pop back to previous view controller
     public func dj_pop() {
         guard let navigationController = navigationController else {
             return
