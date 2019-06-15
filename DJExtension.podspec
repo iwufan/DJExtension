@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name	= 'DJExtension'
-  s.version	= '1.3.4'
+  s.version	= '1.4.1'
   s.summary	= 'Extensions and globalFunctions for swift. Create components with one line of code.'
   s.homepage	= 'https://github.com/iwufan/DJExtension'
   s.license	= 'MIT'
   s.platform	= :ios
   s.swift_version = '4.2'
   s.author 	= {'jiadawei' => 'jiadawei80@126.com'}
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
   s.source	= {:git => 'https://github.com/iwufan/DJExtension.git', :tag => s.version}
   s.source_files = 'DJExtension/**/*.{swift}'
   s.requires_arc = true
