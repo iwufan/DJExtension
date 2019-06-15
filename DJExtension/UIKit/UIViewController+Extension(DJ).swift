@@ -19,12 +19,23 @@ extension UIViewController {
         }
         navigationController.pushViewController(viewController, animated: true)
     }
+    // push a new view controller
+    public func dj_present(_ viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
     // pop back to previous view controller
     public func dj_pop() {
         guard let navigationController = navigationController else {
             return
         }
         navigationController.popViewController(animated: true)
+    }
+    // pop to root view controller
+    public func dj_popToRoot() {
+        guard let navigationController = navigationController else {
+            return
+        }
+        navigationController.popToRootViewController(animated: true)
     }
 }
 
