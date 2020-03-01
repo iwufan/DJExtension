@@ -6,15 +6,45 @@ Extensions, global functions for swift. Create a component with one line of code
 - Create a component with one line of codes, like a label, button, textField...
 - Use global functions instead of some Apple APIs.
 - Make many extensions and convenience init methods for UILabel/UIButton/UIView/UIViewController/UIImage...
+### What's New
+The latest version is 1.5.0. User can create a button with touch event in one line.
+- 1.5.0 or later
+```
+UIButton(title: "login", titleFont: dj_regularFont(22), titleColor: .red, bgColor: .lightGray, superView: view, layoutClosure: { (make) in
+    make.left.equalTo(50)
+    make.top.equalTo(77)
+    make.width.equalTo(88)
+    make.height.equalTo(44)
+}) {
+    print("login successfully!")
+}
+```
+- 1.4.1 or before
+```
+let loginButton = UIButton(title: "login", titleFont: dj_regularFont(22), titleColor: .red, bgColor: .lightGray, superView: view) { (make) in
+    make.left.equalTo(50)
+    make.top.equalTo(77)
+    make.width.equalTo(88)
+    make.height.equalTo(44)
+}
+
+loginButton.dj_addTarget(self, action: #selector(clickLogin))
+
+@objc private func clickLogin() {
+        
+    print("Login Successfully!")
+}
+```
 ### How To Install?
-##### Manual
+##### Manual (Recommended)
 Just drag the `DJExtension` folder to your project. 
 
 This is what all you should do, then you can use the extension functions. All the functions or constants are start with `dj`.
-##### Cocoapods
+##### Cocoapods (Not Recommended)
 `pod 'DJExtension'`
 
 You should also import this framework before you use it, like this `import DJExtension`.
+######The latest version in the pod depository is 1.4.1. 
 ### The reason to use DJExtension
 With DJExtension, you won't need to write duplicate and redundant codes in your projects. Here are some examples.
 #### Example 01 - create labels
@@ -70,9 +100,13 @@ button.snp.makeConstraints { (make) in
 ```
 - now
 ```
-UIButton(title: "On", selTitle: "Off", titleFont: dj_pingRegularFont(11), titleColor: djGreen, selTitleColor: djRed, bgColor: djWhite, target: self, action: #selector(clickSwitch(button:)), superView: view) { (make) in
-    make.center.equalTo(view.snp.center)
-    make.width.height.equalTo(100)
+UIButton(title: "login", titleFont: dj_regularFont(22), titleColor: .red, bgColor: .lightGray, superView: view, layoutClosure: { (make) in
+    make.left.equalTo(50)
+    make.top.equalTo(77)
+    make.width.equalTo(88)
+    make.height.equalTo(44)
+}) {
+    print("login successfully!")
 }
 ```
 #### Example 03 - create text fileds
