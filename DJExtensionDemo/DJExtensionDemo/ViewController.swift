@@ -14,22 +14,48 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIButton(title: "login", titleFont: dj_regularFont(22), titleColor: .red, bgColor: .lightGray, superView: view, layoutClosure: { (make) in
-            make.left.equalTo(20)
-            make.top.equalTo(77)
-            make.width.height.equalTo(88)
-        }) {
-            print("登录成功")
-        }
-        
-        UILabel(text: "hello", font: dj_regularFont(14), color: dj_hexColor("ff0000"), alignment: .center, superView: view) { (make) in
-            make.center.equalTo(self.view)
-            make.width.height.equalTo(80)
-        }
-        
-        print(dj_statusBarHeight())
+        // labels
+        createNormalLabel()
+        createLabelWithLines()
+        // buttons
+        createButtonWithTitle()
     }
-
-
 }
 
+// MARK: - UILabel examples
+extension UIViewController {
+    
+    fileprivate func createNormalLabel() {
+        
+        UILabel(text: "NormalLabel", font: dj_mediumFont(18), color: .orange, superView: view) { (make) in
+            make.left.equalTo(50)
+            make.top.equalTo(200)
+            make.width.equalTo(150)
+            make.height.equalTo(20)
+        }
+    }
+    
+    fileprivate func createLabelWithLines() {
+        
+        UILabel(text: "hi, nice to meet you.", font: dj_mediumFont(18), color: .green, alignment: .left, lineCount: 2, superView: view) { (make) in
+            make.left.equalTo(220)
+            make.top.equalTo(200)
+            make.width.equalTo(100)
+        }
+    }
+}
+
+extension UIViewController {
+    
+    fileprivate func createButtonWithTitle() {
+        
+        UIButton(title: "login", titleFont: dj_regularFont(22), titleColor: .red, bgColor: .lightGray, superView: view, layoutClosure: { (make) in
+            make.left.equalTo(50)
+            make.top.equalTo(77)
+            make.width.equalTo(88)
+            make.height.equalTo(44)
+        }) {
+            print("login successfully!")
+        }
+    }
+}
