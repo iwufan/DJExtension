@@ -44,7 +44,7 @@ This is what all you should do, then you can use the extension functions. All th
 `pod 'DJExtension'`
 
 You should also import this framework before you use it, like this `import DJExtension`.
-######The latest version in the pod depository is 1.4.1. 
+###### The latest version in the pod depository is 1.4.1. So you'd better just drag the whole package to your project. Then you can use the latest functions. 
 ### The reason to use DJExtension
 With DJExtension, you won't need to write duplicate and redundant codes in your projects. Here are some examples.
 #### Example 01 - create labels
