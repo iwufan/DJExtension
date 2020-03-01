@@ -12,9 +12,22 @@ import SnapKit
 // MARK: - init method
 extension UILabel {
     
-    /// quick way to create a label with super view
+    /// create a label
     @discardableResult
-    public convenience init (text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
+    public convenience init (text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1) {
+        
+        self.init()
+        
+        self.text = text
+        self.font = font
+        textColor = color
+        textAlignment = alignment
+        numberOfLines = lineCount
+    }
+    
+    /// create a label with super view
+    @discardableResult
+    public convenience init (text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1, superView: UIView, closure: ((ConstraintMaker) -> Void)) {
         
         self.init()
         
@@ -24,22 +37,27 @@ extension UILabel {
         textAlignment = alignment
         numberOfLines = lineCount
         
-        if let sView = superView {
-            sView.addSubview(self)
-            
-            if let closure = closure {
-                self.snp.makeConstraints(closure)
-            }
-        }
+        superView.addSubview(self)
+        self.snp.makeConstraints(closure)
     }
     
 }
 
 // MARK: - instance method
 extension UILabel {
+    
+    // setup a label
+    public func dj_setup(text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1) {
+        
+        self.text = text
+        self.font = font
+        textColor = color
+        textAlignment = alignment
+        numberOfLines = lineCount
+    }
 
-    // quick way to setup a label with super view
-    public func dj_setup(text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
+    // setup a label with super view
+    public func dj_setup(text: String, font: UIFont, color: UIColor, alignment: NSTextAlignment = .left, lineCount: NSInteger = 1, superView: UIView, closure: ((ConstraintMaker) -> Void)) {
         
         self.text = text
         self.font = font
@@ -47,12 +65,7 @@ extension UILabel {
         textAlignment = alignment
         numberOfLines = lineCount
         
-        if let sView = superView {
-            sView.addSubview(self)
-            
-            if let closure = closure {
-                self.snp.makeConstraints(closure)
-            }
-        }
+        superView.addSubview(self)
+        self.snp.makeConstraints(closure)
     }
 }

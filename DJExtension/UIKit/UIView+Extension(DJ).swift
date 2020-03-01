@@ -14,35 +14,33 @@ public let lineColor         = dj_hexColor("EDEDED")
 // MARK: - init method
 extension UIView {
     
-    /// quick way to create a view with background color and super view
+    /// create a view with background color
     @discardableResult
-    public convenience init (backgroundColor: UIColor, superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
+    public convenience init (backgroundColor: UIColor) {
+        
+        self.init()
+        
+        self.backgroundColor = backgroundColor
+    }
+    /// create a view with background color and super view
+    @discardableResult
+    public convenience init (backgroundColor: UIColor, superView: UIView, closure: ((ConstraintMaker) -> Void)) {
         
         self.init()
         
         self.backgroundColor = backgroundColor
         
-        if let sView = superView {
-            sView.addSubview(self)
-            
-            if let closure = closure {
-                self.snp.makeConstraints(closure)
-            }
-        }
+        superView.addSubview(self)
+        self.snp.makeConstraints(closure)
     }
-    /// quick way to create a view with super view
+    /// create a view with super view
     @discardableResult
-    public convenience init (superView: UIView? = nil, closure: ((ConstraintMaker) -> Void)? = nil) {
+    public convenience init (superView: UIView, closure: ((ConstraintMaker) -> Void)) {
         
         self.init()
 
-        if let sView = superView {
-            sView.addSubview(self)
-            
-            if let closure = closure {
-                self.snp.makeConstraints(closure)
-            }
-        }
+        superView.addSubview(self)
+        self.snp.makeConstraints(closure)
     }
     
 }
