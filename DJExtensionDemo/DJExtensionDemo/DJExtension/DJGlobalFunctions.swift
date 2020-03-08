@@ -121,9 +121,12 @@ public func dj_userdefaults(_ key: String) -> String? {
 // MARK: - height of status bar
 public func dj_statusBarHeight() -> CGFloat {
     
-    let window = UIApplication.shared.windows.first
-        
-    return window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+    if #available(iOS 13.0, *) {
+        let window = UIApplication.shared.windows.first
+        return window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+    } else {
+        return UIApplication.shared.statusBarFrame.height
+    }
 }
 
 // MARK: - height of navigation bar

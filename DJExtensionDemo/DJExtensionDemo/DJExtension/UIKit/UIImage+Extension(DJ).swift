@@ -12,9 +12,9 @@ import UIKit
 extension UIImage {
 
     /// get no render image
-    public class func dj_originalImage(name: String) -> UIImage {
+    public class func dj_originalImage(_ imageName: String) -> UIImage {
         
-        guard let image = UIImage(named: name) else {
+        guard let image = UIImage(named: imageName) else {
             return UIImage()
         }
 

@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 public var djButtonnExtensionTouchClosureKey = "djButtonnExtensionTouchClosureKey"
-public typealias djTouchClosure = () -> Void
+public typealias djTouchClosure = (UIButton) -> Void
 
 // MARK: - init method
 extension UIButton {
@@ -239,7 +239,7 @@ extension UIButton {
     @objc private func touchButton(_ button: UIButton) {
         
         if let closure = touchClosure {
-            closure()
+            closure(button)
         }
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 public var djButtonnExtensionTouchClosureKey = "djButtonnExtensionTouchClosureKey"
-public typealias djTouchClosure = () -> Void
+public typealias djTouchClosure = (UIButton) -> Void
 
 // MARK: - init method
 extension UIButton {
@@ -61,7 +61,7 @@ extension UIButton {
     /// create a button with title/fontSize/TitleColor/selTitleColor/bgColor
     @discardableResult
     public convenience init (title: String, selTitle: String? = nil, titleFont: UIFont, titleColor: UIColor, selTitleColor: UIColor? = nil, bgColor: UIColor = UIColor.clear, titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), action: djTouchClosure? = nil)  {
-        
+
         self.init()
         
         setTitle(title, for: .normal)
@@ -239,7 +239,7 @@ extension UIButton {
     @objc private func touchButton(_ button: UIButton) {
         
         if let closure = touchClosure {
-            closure()
+            closure(button)
         }
     }
 }

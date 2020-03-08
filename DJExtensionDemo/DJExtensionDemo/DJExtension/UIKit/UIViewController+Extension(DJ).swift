@@ -12,32 +12,43 @@ public typealias djActionClosure = (UIAlertAction) -> Void
 
 extension UIViewController {
     
-    // quick way to push a new view controller
+    // push a new view controller
     public func dj_push(_ viewController: UIViewController) {
         guard let navigationController = navigationController else {
             return
         }
         navigationController.pushViewController(viewController, animated: true)
     }
-    // quick way to pop back to previous view controller
+    // push a new view controller
+    public func dj_present(_ viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
+    // pop back to previous view controller
     public func dj_pop() {
         guard let navigationController = navigationController else {
             return
         }
         navigationController.popViewController(animated: true)
     }
+    // pop to root view controller
+    public func dj_popToRoot() {
+        guard let navigationController = navigationController else {
+            return
+        }
+        navigationController.popToRootViewController(animated: true)
+    }
 }
 
 extension UIViewController {
     
-    /// show action sheet with two options without cancel
-    public func dj_showActionSheet(title: String? = nil, message: String? = nil, firstTitle: String, firstAction: @escaping djActionClosure, secondTitle: String, secondAction: @escaping djActionClosure) {
+    /// show action sheet with two options with cancel
+    public func dj_showActionSheet(title: String? = nil, message: String? = nil, cancelTitle: String = "取消", firstTitle: String, firstAction: @escaping djActionClosure, secondTitle: String, secondAction: @escaping djActionClosure) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         
-        let action1 = UIAlertAction(title: firstTitle, style: .default, handler: firstAction)
+        let action1 = UIAlertAction(title: firstTitle,  style: .default, handler: firstAction)
         let action2 = UIAlertAction(title: secondTitle, style: .default, handler: secondAction)
-        let action3 = UIAlertAction(title: "取消", style: .cancel)
+        let action3 = UIAlertAction(title: cancelTitle, style: .cancel)
         
         action1.titleColor(dj_hexColor("333333"))
         action2.titleColor(dj_hexColor("333333"))
@@ -49,15 +60,15 @@ extension UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    /// show action sheet with three options without cancel
-    public func dj_showActionSheet(title: String? = nil, message: String? = nil, firstTitle: String, firstAction: @escaping djActionClosure, secondTitle: String, secondAction: @escaping djActionClosure, thirdTitle: String, thirdAction: @escaping djActionClosure) {
+    /// show action sheet with three options with cancel
+    public func dj_showActionSheet(title: String? = nil, message: String? = nil, cancelTitle: String = "取消", firstTitle: String, firstAction: @escaping djActionClosure, secondTitle: String, secondAction: @escaping djActionClosure, thirdTitle: String, thirdAction: @escaping djActionClosure) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         
-        let action1 = UIAlertAction(title: firstTitle, style: .default, handler: firstAction)
-        let action2 = UIAlertAction(title: secondTitle, style: .default, handler: secondAction)
-        let action3 = UIAlertAction(title: thirdTitle, style: .default, handler: thirdAction)
-        let action4 = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let action1 = UIAlertAction(title: firstTitle,  style: .default,    handler: firstAction)
+        let action2 = UIAlertAction(title: secondTitle, style: .default,    handler: secondAction)
+        let action3 = UIAlertAction(title: thirdTitle,  style: .default,    handler: thirdAction)
+        let action4 = UIAlertAction(title: cancelTitle, style: .cancel,     handler: nil)
         
         action1.titleColor(dj_hexColor("333333"))
         action2.titleColor(dj_hexColor("333333"))
@@ -68,6 +79,31 @@ extension UIViewController {
         alertController.addAction(action2)
         alertController.addAction(action3)
         alertController.addAction(action4)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    /// show action sheet with four options with cancel
+    public func dj_showActionSheet(title: String? = nil, message: String? = nil, cancelTitle: String = "取消", firstTitle: String, firstAction: @escaping djActionClosure, secondTitle: String, secondAction: @escaping djActionClosure, thirdTitle: String, thirdAction: @escaping djActionClosure, fourthTitle: String, fourthAction: @escaping djActionClosure) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        let action1 = UIAlertAction(title: firstTitle,  style: .default,    handler: firstAction)
+        let action2 = UIAlertAction(title: secondTitle, style: .default,    handler: secondAction)
+        let action3 = UIAlertAction(title: thirdTitle,  style: .default,    handler: thirdAction)
+        let action4 = UIAlertAction(title: fourthTitle, style: .default,    handler: fourthAction)
+        let action5 = UIAlertAction(title: cancelTitle, style: .cancel,     handler: nil)
+        
+        action1.titleColor(dj_hexColor("333333"))
+        action2.titleColor(dj_hexColor("333333"))
+        action3.titleColor(dj_hexColor("333333"))
+        action4.titleColor(dj_hexColor("333333"))
+        action5.titleColor(dj_hexColor("333333"))
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(action4)
+        alertController.addAction(action5)
         
         present(alertController, animated: true, completion: nil)
     }
